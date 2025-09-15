@@ -1,0 +1,366 @@
+
+@inproceedings{radford_learning_2021,
+  series    = {Proceedings of {Machine} {Learning} {Research}},
+  title     = {Learning {Transferable} {Visual} {Models} {From} {Natural} {Language} {Supervision}},
+  volume    = {139},
+  url       = {https://proceedings.mlr.press/v139/radford21a.html},
+  abstract  = {State-of-the-art computer vision systems are trained to predict a fixed set of predetermined object categories. This restricted form of supervision limits their generality and usability since additional labeled data is needed to specify any other visual concept. Learning directly from raw text about images is a promising alternative which leverages a much broader source of supervision. We demonstrate that the simple pre-training task of predicting which caption goes with which image is an efficient and scalable way to learn SOTA image representations from scratch on a dataset of 400 million (image, text) pairs collected from the internet. After pre-training, natural language is used to reference learned visual concepts (or describe new ones) enabling zero-shot transfer of the model to downstream tasks. We study the performance of this approach by benchmarking on over 30 different existing computer vision datasets, spanning tasks such as OCR, action recognition in videos, geo-localization, and many types of fine-grained object classification. The model transfers non-trivially to most tasks and is often competitive with a fully supervised baseline without the need for any dataset specific training. For instance, we match the accuracy of the original ResNet-50 on ImageNet zero-shot without needing to use any of the 1.28 million training examples it was trained on.},
+  booktitle = {Proceedings of the 38th {International} {Conference} on {Machine} {Learning}},
+  publisher = {PMLR},
+  author    = {Radford, Alec and Kim, Jong Wook and Hallacy, Chris and Ramesh, Aditya and Goh, Gabriel and Agarwal, Sandhini and Sastry, Girish and Askell, Amanda and Mishkin, Pamela and Clark, Jack and Krueger, Gretchen and Sutskever, Ilya},
+  editor    = {Meila, Marina and Zhang, Tong},
+  month     = jul,
+  year      = {2021},
+  pages     = {8748--8763}
+}
+
+@article{zhang_biomedclip_2025,
+  title   = {{BiomedCLIP}: a multimodal biomedical foundation model pretrained from fifteen million scientific image-text pairs},
+  journal = {arXiv},
+  url     = {https://arxiv.org/abs/2303.00915},
+  author  = {Zhang, Sheng and Xu, Yanbo and Usuyama, Naoto and Xu, Hanwen and Bagga, Jaspreet and Tinn, Robert and Preston, Sam and Rao, Rajesh and Wei, Mu and Valluri, Naveen and Wong, Cliff and Tupini, Andrea and Wang, Yu and Mazzola, Matt and Shukla, Swadheen and Liden, Lars and Gao, Jianfeng and Crabtree, Angela and Piening, Brian and Bifulco, Carlo and Lungren, Matthew P. and Naumann, Tristan and Wang, Sheng and Poon, Hoifung},
+  year    = {2025},
+  volume  = {arXiv:2303.00915},
+  file    = {フルテキスト:C\:\\Users\\kou09\\Zotero\\storage\\RWZ9ZQ2M\\Zhang et al. - 2025 - BiomedCLIP a multimodal biomedical foundation mod.pdf:application/pdf}
+}
+
+@inproceedings{eslami_pubmedclip_2023,
+  address   = {Dubrovnik, Croatia},
+  title     = {{PubMedCLIP}: {How} {Much} {Does} {CLIP} {Benefit} {Visual} {Question} {Answering} in the {Medical} {Domain}?},
+  url       = {https://aclanthology.org/2023.findings-eacl.88/},
+  doi       = {10.18653/v1/2023.findings-eacl.88},
+  abstract  = {Contrastive Language–Image Pre-training (CLIP) has shown remarkable success in learning with cross-modal supervision from extensive amounts of image–text pairs collected online. Thus far, the effectiveness of CLIP has been investigated primarily in general-domain multimodal problems. In this work, we evaluate the effectiveness of CLIP for the task of Medical Visual Question Answering (MedVQA). We present PubMedCLIP, a fine-tuned version of CLIP for the medical domain based on PubMed articles. Our experiments conducted on two MedVQA benchmark datasets illustrate that PubMedCLIP achieves superior results improving the overall accuracy up to 3\% in comparison to the state-of-the-art Model-Agnostic Meta-Learning (MAML) networks pre-trained only on visual data. The PubMedCLIP model with different back-ends, the source code for pre-training them and reproducing our MedVQA pipeline is publicly available at https://github.com/sarahESL/PubMedCLIP.},
+  booktitle = {Findings of the {Association} for {Computational} {Linguistics}: {EACL} 2023},
+  publisher = {Association for Computational Linguistics},
+  author    = {Eslami, Sedigheh and Meinel, Christoph and de Melo, Gerard},
+  editor    = {Vlachos, Andreas and Augenstein, Isabelle},
+  month     = may,
+  year      = {2023},
+  pages     = {1181--1193}
+}
+
+@inproceedings{wang_enhancing_2024,
+  title     = {Enhancing vision-language models for medical imaging: bridging the {3D} gap with innovative slice selection},
+  volume    = {37},
+  url       = {https://proceedings.neurips.cc/paper_files/paper/2024/file/b53513b83232116ae25f57a174a7c993-Paper-Datasets_and_Benchmarks_Track.pdf},
+  booktitle = {Advances in {Neural} {Information} {Processing} {Systems}},
+  publisher = {Curran Associates, Inc.},
+  author    = {Wang, Yuli and Peng, Jian and Dai, Yuwei and Jones, Craig and Sair, Haris and Shen, Jinglai and Loizou, Nicolas and Wu, Jing and Hsu, Wen-Chi and Imami, Maliha and Jiao, Zhicheng and Zhang, Paul and Bai, Harrison},
+  editor    = {Globerson, A. and Mackey, L. and Belgrave, D. and Fan, A. and Paquet, U. and Tomczak, J. and Zhang, C.},
+  year      = {2024},
+  pages     = {99947--99964}
+}
+
+@article{zhang_pmc-vqa_2024,
+  title   = {{PMC}-{VQA}: {Visual} {Instruction} {Tuning} for {Medical} {Visual} {Question} {Answering}},
+  journal = {arXiv},
+  url     = {https://arxiv.org/abs/2305.10415},
+  author  = {Zhang, Xiaoman and Wu, Chaoyi and Zhao, Ziheng and Lin, Weixiong and Zhang, Ya and Wang, Yanfeng and Xie, Weidi},
+  year    = {2024},
+  volume  = {arXiv:2305.10415}
+}
+
+@inproceedings{li_llava-med_2023,
+  title     = {{LLaVA}-{Med}: {Training} a {Large} {Language}-and-{Vision} {Assistant} for {Biomedicine} in {One} {Day}},
+  volume    = {36},
+  url       = {https://proceedings.neurips.cc/paper_files/paper/2023/file/5abcdf8ecdcacba028c6662789194572-Paper-Datasets_and_Benchmarks.pdf},
+  booktitle = {Advances in {Neural} {Information} {Processing} {Systems}},
+  publisher = {Curran Associates, Inc.},
+  author    = {Li, Chunyuan and Wong, Cliff and Zhang, Sheng and Usuyama, Naoto and Liu, Haotian and Yang, Jianwei and Naumann, Tristan and Poon, Hoifung and Gao, Jianfeng},
+  editor    = {Oh, A. and Naumann, T. and Globerson, A. and Saenko, K. and Hardt, M. and Levine, S.},
+  year      = {2023},
+  pages     = {28541--28564}
+}
+
+@article{bai_m3d_2024,
+  title   = {{M3D}: {Advancing} {3D} {Medical} {Image} {Analysis} with {Multi}-{Modal} {Large} {Language} {Models}},
+  journal = {arXiv},
+  url     = {https://arxiv.org/abs/2404.00578},
+  author  = {Bai, Fan and Du, Yuxin and Huang, Tiejun and Meng, Max Q.-H. and Zhao, Bo},
+  year    = {2024},
+  volume  = {arXiv:2404.00578}
+}
+
+@misc{blankemeier_merlin_2024,
+  address  = {United States},
+  title    = {Merlin: {A} {Vision} {Language} {Foundation} {Model} for {3D} {Computed} {Tomography}.},
+  doi      = {10.21203/rs.3.rs-4546309/v1},
+  abstract = {Over 85 million computed tomography (CT) scans are performed annually in the US, of which approximately one quarter focus on the abdomen. Given the current  shortage of both general and specialized radiologists, there is a large impetus  to use artificial intelligence to alleviate the burden of interpreting these  complex imaging studies while simultaneously using the images to extract novel  physiological insights. Prior state-of-the-art approaches for automated medical  image interpretation leverage vision language models (VLMs) that utilize both the  image and the corresponding textual radiology reports. However, current medical  VLMs are generally limited to 2D images and short reports. To overcome these  shortcomings for abdominal CT interpretation, we introduce Merlin - a 3D VLM that  leverages both structured electronic health records (EHR) and unstructured  radiology reports for pretraining without requiring additional manual  annotations. We train Merlin using a high-quality clinical dataset of paired CT  scans (6+ million images from 15,331 CTs), EHR diagnosis codes (1.8+ million  codes), and radiology reports (6+ million tokens) for training. We  comprehensively evaluate Merlin on 6 task types and 752 individual tasks. The  non-adapted (off-the-shelf) tasks include zero-shot findings classification (31  findings), phenotype classification (692 phenotypes), and zero-shot cross-modal  retrieval (image to findings and image to impressions), while model adapted tasks  include 5-year chronic disease prediction (6 diseases), radiology report  generation, and 3D semantic segmentation (20 organs). We perform internal  validation on a test set of 5,137 CTs, and external validation on 7,000 clinical  CTs and on two public CT datasets (VerSe, TotalSegmentator). Beyond these  clinically-relevant evaluations, we assess the efficacy of various network  architectures and training strategies to depict that Merlin has favorable  performance to existing task-specific baselines. We derive data scaling laws to  empirically assess training data needs for requisite downstream task performance.  Furthermore, unlike conventional VLMs that require hundreds of GPUs for training,  we perform all training on a single GPU. This computationally efficient design  can help democratize foundation model training, especially for health systems  with compute constraints. We plan to release our trained models, code, and  dataset, pending manual removal of all protected health information.},
+  language = {eng},
+  author   = {Blankemeier, Louis and Cohen, Joseph Paul and Kumar, Ashwin and Van Veen, Dave and Gardezi, Syed Jamal Safdar and Paschali, Magdalini and Chen, Zhihong and Delbrouck, Jean-Benoit and Reis, Eduardo and Truyts, Cesar and Bluethgen, Christian and Jensen, Malte Engmann Kjeldskov and Ostmeier, Sophie and Varma, Maya and Valanarasu, Jeya Maria Jose and Fang, Zhongnan and Huo, Zepeng and Nabulsi, Zaid and Ardila, Diego and Weng, Wei-Hung and Amaro, Edson and Ahuja, Neera and Fries, Jason and Shah, Nigam H. and Johnston, Andrew and Boutin, Robert D. and Wentland, Andrew and Langlotz, Curtis P. and Hom, Jason and Gatidis, Sergios and Chaudhari, Akshay S.},
+  month    = jun,
+  year     = {2024},
+  pmid     = {38978576},
+  pmcid    = {PMC11230513},
+  note     = {ISSN: 2693-5015
+              Journal Abbreviation: Res Sq
+              Pages: rs.3.rs-4546309
+              Publication Title: Research square}
+}
+
+@inproceedings{hamamci_ct2rep_2024,
+  address   = {Cham},
+  title     = {{CT2Rep}: {Automated} {Radiology} {Report} {Generation} for {3D} {Medical} {Imaging}},
+  isbn      = {978-3-031-72390-2},
+  abstract  = {Medical imaging plays a crucial role in diagnosis, with radiology reports serving as vital documentation. Automating report generation has emerged as a critical need to alleviate the workload of radiologists. While machine learning has facilitated report generation for 2D medical imaging, extending this to 3D has been unexplored due to computational complexity and data scarcity. We introduce the first method to generate radiology reports for 3D medical imaging, specifically targeting chest CT volumes. Given the absence of comparable methods, we establish a baseline using an advanced 3D vision encoder in medical imaging to demonstrate our method's effectiveness, which leverages a novel auto-regressive causal transformer. Furthermore, recognizing the benefits of leveraging information from previous visits, we augment CT2Rep with a cross-attention-based multi-modal fusion module and hierarchical memory, enabling the incorporation of longitudinal multimodal data. Access our code at https://github.com/ibrahimethemhamamci/CT2Rep.},
+  booktitle = {Medical {Image} {Computing} and {Computer} {Assisted} {Intervention} – {MICCAI} 2024},
+  publisher = {Springer Nature Switzerland},
+  author    = {Hamamci, Ibrahim Ethem and Er, Sezgin and Menze, Bjoern},
+  editor    = {Linguraru, Marius George and Dou, Qi and Feragen, Aasa and Giannarou, Stamatia and Glocker, Ben and Lekadir, Karim and Schnabel, Julia A.},
+  year      = {2024},
+  pages     = {476--486}
+}
+
+@article{li_llava-next-interleave_2024,
+  title   = {{LLaVA}-{NeXT}-{Interleave}: {Tackling} {Multi}-image, {Video}, and {3D} in {Large} {Multimodal} {Models}},
+  journal = {arXiv},
+  url     = {https://arxiv.org/abs/2407.07895},
+  author  = {Li, Feng and Zhang, Renrui and Zhang, Hao and Zhang, Yuanhan and Li, Bo and Li, Wei and Ma, Zejun and Li, Chunyuan},
+  year    = {2024},
+  volume  = {arXiv:2407.07895}
+}
+
+@inproceedings{xiao_florence-2_2024,
+  title     = {Florence-2: {Advancing} a {Unified} {Representation} for a {Variety} of {Vision} {Tasks}},
+  booktitle = {Proceedings of the {IEEE}/{CVF} {Conference} on {Computer} {Vision} and {Pattern} {Recognition} ({CVPR})},
+  author    = {Xiao, Bin and Wu, Haiping and Xu, Weijian and Dai, Xiyang and Hu, Houdong and Lu, Yumao and Zeng, Michael and Liu, Ce and Yuan, Lu},
+  month     = jun,
+  year      = {2024},
+  pages     = {4818--4829}
+}
+
+@inproceedings{chen_internvl_2024,
+  title     = {{InternVL}: {Scaling} up {Vision} {Foundation} {Models} and {Aligning} for {Generic} {Visual}-{Linguistic} {Tasks}},
+  booktitle = {Proceedings of the {IEEE}/{CVF} {Conference} on {Computer} {Vision} and {Pattern} {Recognition} ({CVPR})},
+  author    = {Chen, Zhe and Wu, Jiannan and Wang, Wenhai and Su, Weijie and Chen, Guo and Xing, Sen and Zhong, Muyan and Zhang, Qinglong and Zhu, Xizhou and Lu, Lewei and Li, Bin and Luo, Ping and Lu, Tong and Qiao, Yu and Dai, Jifeng},
+  month     = jun,
+  year      = {2024},
+  pages     = {24185--24198}
+}
+
+@inproceedings{liu_slake_2021,
+  title     = {Slake: {A} {Semantically}-{Labeled} {Knowledge}-{Enhanced} {Dataset} {For} {Medical} {Visual} {Question} {Answering}},
+  doi       = {10.1109/ISBI48211.2021.9434010},
+  booktitle = {2021 {IEEE} 18th {International} {Symposium} on {Biomedical} {Imaging} ({ISBI})},
+  author    = {Liu, Bo and Zhan, Li-Ming and Xu, Li and Ma, Lin and Yang, Yan and Wu, Xiao-Ming},
+  year      = {2021},
+  keywords  = {Annotations, Biomedical imaging, Dataset, Medical services, medical visual question answering, multi-modality fusion., Question answering (information retrieval), Semantics, Training, Visualization},
+  pages     = {1650--1654}
+}
+
+@article{lau_dataset_2018,
+  title    = {A dataset of clinically generated visual questions and answers about radiology images},
+  volume   = {5},
+  issn     = {2052-4463},
+  url      = {https://doi.org/10.1038/sdata.2018.251},
+  doi      = {10.1038/sdata.2018.251},
+  abstract = {Radiology images are an essential part of clinical decision making and population screening, e.g., for cancer. Automated systems could help clinicians cope with large amounts of images by answering questions about the image contents. An emerging area of artificial intelligence, Visual Question Answering (VQA) in the medical domain explores approaches to this form of clinical decision support. Success of such machine learning tools hinges on availability and design of collections composed of medical images augmented with question-answer pairs directed at the content of the image. We introduce VQA-RAD, the first manually constructed dataset where clinicians asked naturally occurring questions about radiology images and provided reference answers. Manual categorization of images and questions provides insight into clinically relevant tasks and the natural language to phrase them. Evaluating with well-known algorithms, we demonstrate the rich quality of this dataset over other automatically constructed ones. We propose VQA-RAD to encourage the community to design VQA tools with the goals of improving patient care.},
+  number   = {1},
+  journal  = {Scientific Data},
+  author   = {Lau, Jason J. and Gayen, Soumya and Ben Abacha, Asma and Demner-Fushman, Dina},
+  month    = nov,
+  year     = {2018},
+  pages    = {180251}
+}
+
+@article{dong_generative_2025,
+  title    = {Generative {Models} in {Medical} {Visual} {Question} {Answering}: {A} {Survey}},
+  volume   = {15},
+  issn     = {2076-3417},
+  url      = {https://www.mdpi.com/2076-3417/15/6/2983},
+  doi      = {10.3390/app15062983},
+  abstract = {Medical Visual Question Answering (MedVQA) is a crucial intersection of artificial intelligence and healthcare. It enables systems to interpret medical images—such as X-rays, MRIs, and pathology slides—and respond to clinical queries. Early approaches primarily relied on discriminative models, which select answers from predefined candidates. However, these methods struggle to effectively address open-ended, domain-specific, or complex queries. Recent advancements have shifted the focus toward generative models, leveraging autoregressive decoders, large language models (LLMs), and multimodal large language models (MLLMs) to generate more nuanced and free-form answers. This review comprehensively examines the paradigm shift from discriminative to generative systems, examining generative MedVQA works on their model architectures and training process, summarizing evaluation benchmarks and metrics, highlighting key advances and techniques that propels the development of generative MedVQA, such as concept alignment, instruction tuning, and parameter-efficient fine-tuning (PEFT), alongside strategies for data augmentation and automated dataset creation. Finally, we propose future directions to enhance clinical reasoning and intepretability, build robust evaluation benchmarks and metrics, and employ scalable training strategies and deployment solutions. By analyzing the strengths and limitations of existing generative MedVQA approaches, we aim to provide valuable insights for researchers and practitioners working in this domain.},
+  number   = {6},
+  journal  = {Applied Sciences},
+  author   = {Dong, Wenjie and Shen, Shuhao and Han, Yuqiang and Tan, Tao and Wu, Jian and Xu, Hongxia},
+  year     = {2025}
+}
+
+@article{bae_ehrxqa_2024,
+  title   = {{EHRXQA}: {A} multi-modal question answering dataset for electronic health records with chest x-ray images},
+  volume  = {36},
+  journal = {Advances in Neural Information Processing Systems},
+  author  = {Bae, Seongsu and Kyung, Daeun and Ryu, Jaehee and Cho, Eunbyeol and Lee, Gyubok and Kweon, Sunjun and Oh, Jungwoo and Ji, Lei and Chang, Eric and Kim, Tackeun and {others}},
+  year    = {2024}
+}
+
+@article{wasserthal_totalsegmentator_2023,
+  title    = {{TotalSegmentator}: {Robust} {Segmentation} of 104 {Anatomic} {Structures} in {CT} {Images}},
+  volume   = {5},
+  url      = {https://doi.org/10.1148/ryai.230024},
+  doi      = {10.1148/ryai.230024},
+  abstract = {Purpose To present a deep learning segmentation model that can automatically and robustly segment all major anatomic structures on body CT images. Materials and Methods In this retrospective study, 1204 CT examinations (from 2012, 2016, and 2020) were used to segment 104 anatomic structures (27 organs, 59 bones, 10 muscles, and eight vessels) relevant for use cases such as organ volumetry, disease characterization, and surgical or radiation therapy planning. The CT images were randomly sampled from routine clinical studies and thus represent a real-world dataset (different ages, abnormalities, scanners, body parts, sequences, and sites). The authors trained an nnU-Net segmentation algorithm on this dataset and calculated Dice similarity coefficients to evaluate the model’s performance. The trained algorithm was applied to a second dataset of 4004 whole-body CT examinations to investigate age-dependent volume and attenuation changes. Results The proposed model showed a high Dice score (0.943) on the test set, which included a wide range of clinical data with major abnormalities. The model significantly outperformed another publicly available segmentation model on a separate dataset (Dice score, 0.932 vs 0.871; P {\textless} .001). The aging study demonstrated significant correlations between age and volume and mean attenuation for a variety of organ groups (eg, age and aortic volume [rs = 0.64; P {\textless} .001]; age and mean attenuation of the autochthonous dorsal musculature [rs = −0.74; P {\textless} .001]). Conclusion The developed model enables robust and accurate segmentation of 104 anatomic structures. The annotated dataset (https://doi.org/10.5281/zenodo.6802613) and toolkit (https://www.github.com/wasserth/TotalSegmentator) are publicly available. Keywords: CT, Segmentation, Neural Networks Supplemental material is available for this article. © RSNA, 2023 See also commentary by Sebro and Mongan in this issue.},
+  number   = {5},
+  journal  = {Radiology: Artificial Intelligence},
+  author   = {Wasserthal, Jakob and Breit, Hanns-Christian and Meyer, Manfred T. and Pradella, Maurice and Hinck, Daniel and Sauter, Alexander W. and Heye, Tobias and Boll, Daniel T. and Cyriac, Joshy and Yang, Shan and Bach, Michael and Segeroth, Martin},
+  year     = {2023},
+  note     = {\_eprint: https://doi.org/10.1148/ryai.230024},
+  pages    = {e230024}
+}
+
+@article{openai_gpt-4_2024,
+  title   = {{GPT}-4 {Technical} {Report}},
+  journal = {arXiv},
+  url     = {https://arxiv.org/abs/2303.08774},
+  author  = {{OpenAI} and Achiam, Josh and Adler, Steven and Agarwal, Sandhini and Ahmad, Lama and Akkaya, Ilge and Aleman, Florencia Leoni and Almeida, Diogo and Altenschmidt, Janko and Altman, Sam and Anadkat, Shyamal and Avila, Red and Babuschkin, Igor and Balaji, Suchir and Balcom, Valerie and Baltescu, Paul and Bao, Haiming and Bavarian, Mohammad and Belgum, Jeff and Bello, Irwan and Berdine, Jake and Bernadett-Shapiro, Gabriel and Berner, Christopher and Bogdonoff, Lenny and Boiko, Oleg and Boyd, Madelaine and Brakman, Anna-Luisa and Brockman, Greg and Brooks, Tim and Brundage, Miles and Button, Kevin and Cai, Trevor and Campbell, Rosie and Cann, Andrew and Carey, Brittany and Carlson, Chelsea and Carmichael, Rory and Chan, Brooke and Chang, Che and Chantzis, Fotis and Chen, Derek and Chen, Sully and Chen, Ruby and Chen, Jason and Chen, Mark and Chess, Ben and Cho, Chester and Chu, Casey and Chung, Hyung Won and Cummings, Dave and Currier, Jeremiah and Dai, Yunxing and Decareaux, Cory and Degry, Thomas and Deutsch, Noah and Deville, Damien and Dhar, Arka and Dohan, David and Dowling, Steve and Dunning, Sheila and Ecoffet, Adrien and Eleti, Atty and Eloundou, Tyna and Farhi, David and Fedus, Liam and Felix, Niko and Fishman, Simón Posada and Forte, Juston and Fulford, Isabella and Gao, Leo and Georges, Elie and Gibson, Christian and Goel, Vik and Gogineni, Tarun and Goh, Gabriel and Gontijo-Lopes, Rapha and Gordon, Jonathan and Grafstein, Morgan and Gray, Scott and Greene, Ryan and Gross, Joshua and Gu, Shixiang Shane and Guo, Yufei and Hallacy, Chris and Han, Jesse and Harris, Jeff and He, Yuchen and Heaton, Mike and Heidecke, Johannes and Hesse, Chris and Hickey, Alan and Hickey, Wade and Hoeschele, Peter and Houghton, Brandon and Hsu, Kenny and Hu, Shengli and Hu, Xin and Huizinga, Joost and Jain, Shantanu and Jain, Shawn and Jang, Joanne and Jiang, Angela and Jiang, Roger and Jin, Haozhun and Jin, Denny and Jomoto, Shino and Jonn, Billie and Jun, Heewoo and Kaftan, Tomer and Kaiser, Łukasz and Kamali, Ali and Kanitscheider, Ingmar and Keskar, Nitish Shirish and Khan, Tabarak and Kilpatrick, Logan and Kim, Jong Wook and Kim, Christina and Kim, Yongjik and Kirchner, Jan Hendrik and Kiros, Jamie and Knight, Matt and Kokotajlo, Daniel and Kondraciuk, Łukasz and Kondrich, Andrew and Konstantinidis, Aris and Kosic, Kyle and Krueger, Gretchen and Kuo, Vishal and Lampe, Michael and Lan, Ikai and Lee, Teddy and Leike, Jan and Leung, Jade and Levy, Daniel and Li, Chak Ming and Lim, Rachel and Lin, Molly and Lin, Stephanie and Litwin, Mateusz and Lopez, Theresa and Lowe, Ryan and Lue, Patricia and Makanju, Anna and Malfacini, Kim and Manning, Sam and Markov, Todor and Markovski, Yaniv and Martin, Bianca and Mayer, Katie and Mayne, Andrew and McGrew, Bob and McKinney, Scott Mayer and McLeavey, Christine and McMillan, Paul and McNeil, Jake and Medina, David and Mehta, Aalok and Menick, Jacob and Metz, Luke and Mishchenko, Andrey and Mishkin, Pamela and Monaco, Vinnie and Morikawa, Evan and Mossing, Daniel and Mu, Tong and Murati, Mira and Murk, Oleg and Mély, David and Nair, Ashvin and Nakano, Reiichiro and Nayak, Rajeev and Neelakantan, Arvind and Ngo, Richard and Noh, Hyeonwoo and Ouyang, Long and O'Keefe, Cullen and Pachocki, Jakub and Paino, Alex and Palermo, Joe and Pantuliano, Ashley and Parascandolo, Giambattista and Parish, Joel and Parparita, Emy and Passos, Alex and Pavlov, Mikhail and Peng, Andrew and Perelman, Adam and Peres, Filipe de Avila Belbute and Petrov, Michael and Pinto, Henrique Ponde de Oliveira and {Michael} and {Pokorny} and Pokrass, Michelle and Pong, Vitchyr H. and Powell, Tolly and Power, Alethea and Power, Boris and Proehl, Elizabeth and Puri, Raul and Radford, Alec and Rae, Jack and Ramesh, Aditya and Raymond, Cameron and Real, Francis and Rimbach, Kendra and Ross, Carl and Rotsted, Bob and Roussez, Henri and Ryder, Nick and Saltarelli, Mario and Sanders, Ted and Santurkar, Shibani and Sastry, Girish and Schmidt, Heather and Schnurr, David and Schulman, John and Selsam, Daniel and Sheppard, Kyla and Sherbakov, Toki and Shieh, Jessica and Shoker, Sarah and Shyam, Pranav and Sidor, Szymon and Sigler, Eric and Simens, Maddie and Sitkin, Jordan and Slama, Katarina and Sohl, Ian and Sokolowsky, Benjamin and Song, Yang and Staudacher, Natalie and Such, Felipe Petroski and Summers, Natalie and Sutskever, Ilya and Tang, Jie and Tezak, Nikolas and Thompson, Madeleine B. and Tillet, Phil and Tootoonchian, Amin and Tseng, Elizabeth and Tuggle, Preston and Turley, Nick and Tworek, Jerry and Uribe, Juan Felipe Cerón and Vallone, Andrea and Vijayvergiya, Arun and Voss, Chelsea and Wainwright, Carroll and Wang, Justin Jay and Wang, Alvin and Wang, Ben and Ward, Jonathan and Wei, Jason and Weinmann, C. J. and Welihinda, Akila and Welinder, Peter and Weng, Jiayi and Weng, Lilian and Wiethoff, Matt and Willner, Dave and Winter, Clemens and Wolrich, Samuel and Wong, Hannah and Workman, Lauren and Wu, Sherwin and Wu, Jeff and Wu, Michael and Xiao, Kai and Xu, Tao and Yoo, Sarah and Yu, Kevin and Yuan, Qiming and Zaremba, Wojciech and Zellers, Rowan and Zhang, Chong and Zhang, Marvin and Zhao, Shengjia and Zheng, Tianhao and Zhuang, Juntang and Zhuk, William and Zoph, Barret},
+  year    = {2024},
+  volume  = {arXiv:2303.08774}
+}
+
+@inproceedings{alayrac_flamingo_2022,
+  title     = {Flamingo: a {Visual} {Language} {Model} for {Few}-{Shot} {Learning}},
+  volume    = {35},
+  url       = {https://proceedings.neurips.cc/paper_files/paper/2022/file/960a172bc7fbf0177ccccbb411a7d800-Paper-Conference.pdf},
+  booktitle = {Advances in {Neural} {Information} {Processing} {Systems}},
+  publisher = {Curran Associates, Inc.},
+  author    = {Alayrac, Jean-Baptiste and Donahue, Jeff and Luc, Pauline and Miech, Antoine and Barr, Iain and Hasson, Yana and Lenc, Karel and Mensch, Arthur and Millican, Katherine and Reynolds, Malcolm and Ring, Roman and Rutherford, Eliza and Cabi, Serkan and Han, Tengda and Gong, Zhitao and Samangooei, Sina and Monteiro, Marianne and Menick, Jacob L and Borgeaud, Sebastian and Brock, Andy and Nematzadeh, Aida and Sharifzadeh, Sahand and Bińkowski, Mikoł aj and Barreira, Ricardo and Vinyals, Oriol and Zisserman, Andrew and Simonyan, Karén},
+  editor    = {Koyejo, S. and Mohamed, S. and Agarwal, A. and Belgrave, D. and Cho, K. and Oh, A.},
+  year      = {2022},
+  pages     = {23716--23736}
+}
+
+@inproceedings{li_grounded_2022,
+  title     = {Grounded {Language}-{Image} {Pre}-{Training}},
+  booktitle = {Proceedings of the {IEEE}/{CVF} {Conference} on {Computer} {Vision} and {Pattern} {Recognition} ({CVPR})},
+  author    = {Li, Liunian Harold and Zhang, Pengchuan and Zhang, Haotian and Yang, Jianwei and Li, Chunyuan and Zhong, Yiwu and Wang, Lijuan and Yuan, Lu and Zhang, Lei and Hwang, Jenq-Neng and Chang, Kai-Wei and Gao, Jianfeng},
+  month     = jun,
+  year      = {2022},
+  pages     = {10965--10975}
+}
+
+@inproceedings{zhong_regionclip_2022,
+  title     = {{RegionCLIP}: {Region}-{Based} {Language}-{Image} {Pretraining}},
+  booktitle = {Proceedings of the {IEEE}/{CVF} {Conference} on {Computer} {Vision} and {Pattern} {Recognition} ({CVPR})},
+  author    = {Zhong, Yiwu and Yang, Jianwei and Zhang, Pengchuan and Li, Chunyuan and Codella, Noel and Li, Liunian Harold and Zhou, Luowei and Dai, Xiyang and Yuan, Lu and Li, Yin and Gao, Jianfeng},
+  month     = jun,
+  year      = {2022},
+  pages     = {16793--16803}
+}
+
+@inproceedings{zhai_sigmoid_2023,
+  title     = {Sigmoid {Loss} for {Language} {Image} {Pre}-{Training}},
+  booktitle = {Proceedings of the {IEEE}/{CVF} {International} {Conference} on {Computer} {Vision} ({ICCV})},
+  author    = {Zhai, Xiaohua and Mustafa, Basil and Kolesnikov, Alexander and Beyer, Lucas},
+  month     = oct,
+  year      = {2023},
+  pages     = {11975--11986}
+}
+
+@article{gao_clip-adapter_2024,
+  title    = {{CLIP}-{Adapter}: {Better} {Vision}-{Language} {Models} with {Feature} {Adapters}},
+  volume   = {132},
+  issn     = {1573-1405},
+  url      = {https://doi.org/10.1007/s11263-023-01891-x},
+  doi      = {10.1007/s11263-023-01891-x},
+  abstract = {Large-scale contrastive vision-language pretraining has shown significant progress in visual representation learning. Unlike traditional visual systems trained by a fixed set of discrete labels, a new paradigm was introduced in Radford et al. (International conference on machine learning, PMLR, 2021) to directly learn to align images with raw texts in an open-vocabulary setting. On downstream tasks, a carefully chosen text prompt is employed to make zero-shot predictions. To avoid non-trivial prompt engineering, context optimization (Zhou et al. in Int J Comput Vis 130(9):2337–2348, 2022) has been proposed to learn continuous vectors as task-specific prompts with few-shot training examples. In this paper, we show that there is an alternative path to achieve better vision-language models other than prompt tuning. While prompt tuning is for the textual inputs, we propose CLIP-Adapter to conduct fine-tuning with feature adapters on either visual or language branch. Specifically, CLIP-Adapter adopts an additional bottleneck layer to learn new features and performs residual-style feature blending with the original pretrained features. As a consequence, CLIP-Adapter is able to outperform context optimization while maintaining a simple design. Experiments and extensive ablation studies on various visual classification tasks demonstrate the effectiveness of our approach.},
+  number   = {2},
+  journal  = {International Journal of Computer Vision},
+  author   = {Gao, Peng and Geng, Shijie and Zhang, Renrui and Ma, Teli and Fang, Rongyao and Zhang, Yongfeng and Li, Hongsheng and Qiao, Yu},
+  month    = feb,
+  year     = {2024},
+  pages    = {581--595}
+}
+
+@inproceedings{pelka_radiology_2018,
+  address   = {Cham},
+  title     = {Radiology {Objects} in {COntext} ({ROCO}): {A} {Multimodal} {Image} {Dataset}},
+  isbn      = {978-3-030-01364-6},
+  abstract  = {This work introduces a new multimodal image dataset, with the aim of detecting the interplay between visual elements and semantic relations present in radiology images. The objective is accomplished by retrieving all image-caption pairs from the open-access biomedical literature database PubMedCentral, as these captions describe the visual content in their semantic context. All compound, multi-pane, and non-radiology images were eliminated using an automatic binary classifier fine-tuned with a deep convolutional neural network system. Radiology Objects in COntext (ROCO) dataset contains over 81k radiology images with several medical imaging modalities including Computer Tomography, Ultrasound, X-Ray, Fluoroscopy, Positron Emission Tomography, Mammography, Magnetic Resonance Imaging, Angiography. All images in ROCO have corresponding caption, keywords, Unified Medical Language Systems Concept Unique Identifiers and Semantic Type. An out-of-class set with 6k images ranging from synthetic radiology figures to digital arts is provided, to improve prediction and classification performance. Adopting ROCO, systems for caption and keywords generation can be modeled, which allows multimodal representation for datasets lacking text representation. Systems with the goal of image structuring and semantic information tagging can be created using ROCO, which is beneficial and of assistance for image and information retrieval purposes.},
+  booktitle = {Intravascular {Imaging} and {Computer} {Assisted} {Stenting} and {Large}-{Scale} {Annotation} of {Biomedical} {Data} and {Expert} {Label} {Synthesis}},
+  publisher = {Springer International Publishing},
+  author    = {Pelka, Obioma and Koitka, Sven and Rückert, Johannes and Nensa, Felix and Friedrich, Christoph M.},
+  editor    = {Stoyanov, Danail and Taylor, Zeike and Balocco, Simone and Sznitman, Raphael and Martel, Anne and Maier-Hein, Lena and Duong, Luc and Zahnd, Guillaume and Demirci, Stefanie and Albarqouni, Shadi and Lee, Su-Lin and Moriconi, Stefano and Cheplygina, Veronika and Mateus, Diana and Trucco, Emanuele and Granger, Eric and Jannin, Pierre},
+  year      = {2018},
+  pages     = {180--189}
+}
+
+@inproceedings{koleilat_medclip-sam_2024,
+  address   = {Cham},
+  title     = {{MedCLIP}-{SAM}: {Bridging} {Text} and {Image} {Towards} {Universal} {Medical} {Image} {Segmentation}},
+  isbn      = {978-3-031-72390-2},
+  abstract  = {Medical image segmentation of anatomical structures and pathology is crucial in modern clinical diagnosis, disease study, and treatment planning. To date, great progress has been made in deep learning-based segmentation techniques, but most methods still lack data efficiency, generalizability, and interactability. Consequently, the development of new, precise segmentation methods that demand fewer labeled datasets is of utmost importance in medical image analysis. Recently, the emergence of foundation models, such as CLIP and Segment-Anything-Model (SAM), with comprehensive cross-domain representation opened the door for interactive and universal image segmentation. However, exploration of these models for data-efficient medical image segmentation is still limited but is highly necessary. In this paper, we propose a novel framework, called MedCLIP-SAM that combines CLIP and SAM models to generate segmentation of clinical scans using text prompts in both zero-shot and weakly supervised settings. To achieve this, we employed a new Decoupled Hard Negative Noise Contrastive Estimation (DHN-NCE) loss to fine-tune the BiomedCLIP model and the recent gScoreCAM to generate prompts to obtain segmentation masks from SAM in a zero-shot setting. Additionally, we explored the use of zero-shot segmentation labels in a weakly supervised paradigm to improve the segmentation quality further. By extensively testing three diverse segmentation tasks and medical image modalities (breast tumor ultrasound, brain tumor MRI, and lung X-ray), our proposed framework has demonstrated excellent accuracy. Code is available at https://github.com/HealthX-Lab/MedCLIP-SAM.},
+  booktitle = {Medical {Image} {Computing} and {Computer} {Assisted} {Intervention} – {MICCAI} 2024},
+  publisher = {Springer Nature Switzerland},
+  author    = {Koleilat, Taha and Asgariandehkordi, Hojat and Rivaz, Hassan and Xiao, Yiming},
+  editor    = {Linguraru, Marius George and Dou, Qi and Feragen, Aasa and Giannarou, Stamatia and Glocker, Ben and Lekadir, Karim and Schnabel, Julia A.},
+  year      = {2024},
+  pages     = {643--653}
+}
+
+@article{zhao_foundation_2024,
+  title   = {A foundation model for joint segmentation, detection and recognition of biomedical objects across nine modalities},
+  volume  = {22},
+  issn    = {1548-7105},
+  url     = {http://dx.doi.org/10.1038/s41592-024-02499-w},
+  doi     = {10.1038/s41592-024-02499-w},
+  number  = {1},
+  journal = {Nature Methods},
+  author  = {Zhao, Theodore and Gu, Yu and Yang, Jianwei and Usuyama, Naoto and Lee, Ho Hin and Kiblawi, Sid and Naumann, Tristan and Gao, Jianfeng and Crabtree, Angela and Abel, Jacob and Moung-Wen, Christine and Piening, Brian and Bifulco, Carlo and Wei, Mu and Poon, Hoifung and Wang, Sheng},
+  month   = jan,
+  year    = {2024},
+  note    = {Publisher: Springer Science and Business Media LLC},
+  pages   = {166--176}
+}
+
+@article{polis_exploring_2025,
+  title    = {Exploring {BiomedCLIP}’s {Capabilities} in {Medical} {Image} {Analysis}: {A} {Focus} on {Scoliosis} {Detection} and {Severity} {Assessment}},
+  volume   = {15},
+  issn     = {2076-3417},
+  url      = {https://www.mdpi.com/2076-3417/15/1/398},
+  doi      = {10.3390/app15010398},
+  abstract = {Background/Objectives: Open-source artificial intelligence models (OSAIMs), such as BiomedCLIP, hold great potential for medical image analysis. While OSAIMs are increasingly utilized for general image interpretation, their adaptation for specialized medical tasks, such as evaluating scoliosis on posturographic X-ray images, is still developing. This study aims to evaluate the effectiveness of BiomedCLIP in detecting and classifying scoliosis types (single-curve and double-curve) and in assessing scoliosis severity. Methods: The study was conducted using a dataset of 262 anonymized posturographic X-ray images from pediatric patients (ages 2–17) with diagnosed scoliosis. The images were collected between January 2021 and July 2024. Two neurosurgical experts manually analyzed the Cobb angles and scoliosis stages (mild, moderate, severe). BiomedCLIP’s performance in detecting scoliosis and its type was evaluated using metrics such as accuracy, sensitivity, specificity, and AUC (Area Under the Curve). Statistical analyses, including Pearson correlation and ROC curve analysis, were applied to assess the model’s performance. Results: BiomedCLIP demonstrated moderate sensitivity in detecting scoliosis, with stronger performance in severe cases (AUC = 0.87). However, its predictive accuracy was lower for mild and moderate stages (AUC = 0.75 and 0.74, respectively). The model struggled with correctly identifying single-curve scoliosis (sensitivity = 0.35, AUC = 0.53), while it performed better in recognizing double-curve cases (sensitivity = 0.78, AUC = 0.53). Overall, the model’s predictions correlated moderately with observed Cobb angles (r = 0.37, p {\textless} 0.001). Conclusions: BiomedCLIP shows promise in identifying advanced scoliosis, but its performance is limited in early-stage detection and in distinguishing between scoliosis types, particularly single-curve scoliosis. Further model refinement and broader training datasets are essential to enhance its clinical applicability in scoliosis assessment.},
+  number   = {1},
+  journal  = {Applied Sciences},
+  author   = {Polis, Bartosz and Zawadzka-Fabijan, Agnieszka and Fabijan, Robert and Kosińska, Róża and Nowosławska, Emilia and Fabijan, Artur},
+  year     = {2025}
+}
+
+@article{devries_improved_2017,
+  title   = {Improved {Regularization} of {Convolutional} {Neural} {Networks} with {Cutout}},
+  journal = {arXiv},
+  author  = {DeVries, Terrance and Taylor, Graham W},
+  year    = {2017},
+  volume  = {arXiv:1708.04552}
+}
+
+@article{youden_index_1950,
+  title   = {Index for rating diagnostic tests},
+  volume  = {3},
+  url     = {https://acsjournals.onlinelibrary.wiley.com/doi/abs/10.1002/1097-0142%281950%293%3A1%3C32%3A%3AAID-CNCR2820030106%3E3.0.CO%3B2-3},
+  doi     = {https://doi.org/10.1002/1097-0142(1950)3:1<32::AID-CNCR2820030106>3.0.CO;2-3},
+  number  = {1},
+  journal = {Cancer},
+  author  = {Youden, W. J.},
+  year    = {1950},
+  note    = {\_eprint: https://acsjournals.onlinelibrary.wiley.com/doi/pdf/10.1002/1097-0142\%281950\%293\%3A1\%3C32\%3A\%3AAID-CNCR2820030106\%3E3.0.CO\%3B2-3},
+  pages   = {32--35}
+}
+
+@article{jiang_evaluating_2024,
+  title    = {Evaluating {General} {Vision}-{Language} {Models} for {Clinical} {Medicine}},
+  url      = {https://www.medrxiv.org/content/early/2024/04/18/2024.04.12.24305744},
+  doi      = {10.1101/2024.04.12.24305744},
+  abstract = {Recently emerging large multimodal models (LMMs) utilize various types of data modalities, including text and visual inputs to generate outputs. The incorporation of LMMs into clinical medicine presents unique challenges, including accuracy, reliability, and clinical relevance. Here, we explore clinical applications of GPT-4V, an LMM that has been proposed for use in medicine, in gastroenterology, radiology, dermatology, and United States Medical Licensing Examination (USMLE) test questions. We used standardized robust datasets with thousands of endoscopy images, chest x-ray, and skin lesions to benchmark GPT-4V’s ability to predict diagnoses. To assess bias, we also explored GPT-4V’s ability to determine Fitzpatrick skin tones with dermatology images. We found that GPT-4V is limited in performance across all four domains, resulting in decreased performance compared to previously published baseline models. The macro-average precision, recall, and F1-score for gastroenterology were 11.2\%, 9.1\% and 6.8\% respectively. For radiology, the best performing task of identifying cardiomegaly had precision, recall, and F1-score of 28\%, 94\%, and 43\% respectively. In dermatology, GPT-4V had an overall top-1 and top-3 diagnostic accuracy of 6.2\% and 21\% respectively. There was a significant accuracy drop when predicting images of darker skin tones (p\&lt;0.001). GPT-4V accurately identified Fitzpatrick skin tones for 56.5\% of images. For the multiple-choice-styled USMLE image-based test questions, GPT-4V had an accuracy of 59\%. Our findings demonstrate that the current version of GPT-4V is limited in its diagnostic abilities across multiple image-based medical specialties. Future work should be done to explore LMM’s sensitivity to prompting as well as hybrid models that can combine LMM’s capabilities with other robust models.Competing Interest StatementR.D. has served as an advisor to MDAlgorithms and Revea and received consulting fees from Pfizer, L’Oreal, Frazier Healthcare Partners, and DWA, and research funding from UCB. All other authors declare no competing interests.Funding StatementThis study did not receive any funding.Author DeclarationsI confirm all relevant ethical guidelines have been followed, and any necessary IRB and/or ethics committee approvals have been obtained.YesI confirm that all necessary patient/participant consent has been obtained and the appropriate institutional forms have been archived, and that any patient/participant/sample identifiers included were not known to anyone (e.g., hospital staff, patients or participants themselves) outside the research group so cannot be used to identify individuals.YesI understand that all clinical trials and any other prospective interventional studies must be registered with an ICMJE-approved registry, such as ClinicalTrials.gov. I confirm that any such study reported in the manuscript has been registered and the trial registration ID is provided (note: if posting a prospective study registered retrospectively, please provide a statement in the trial ID field explaining why the study was not registered in advance).YesI have followed all appropriate research reporting guidelines, such as any relevant EQUATOR Network research reporting checklist(s) and other pertinent material, if applicable.Yes},
+  journal  = {medRxiv},
+  author   = {Jiang, Yixing and Omiye, Jesutofunmi A. and Zakka, Cyril and Moor, Michael and Gui, Haiwen and Alipour, Shayan and Mousavi, Seyed Shahabeddin and Chen, Jonathan H. and Rajpurkar, Pranav and Daneshjou, Roxana},
+  year     = {2024},
+  note     = {Publisher: Cold Spring Harbor Laboratory Press
+              \_eprint: https://www.medrxiv.org/content/early/2024/04/18/2024.04.12.24305744.full.pdf}
+}
+
+@article{yuan_hecvl_2025,
+  title   = {{HecVL}: {Hierarchical} {Video}-{Language} {Pretraining} for {Zero}-shot {Surgical} {Phase} {Recognition}},
+  journal = {arXiv},
+  url     = {https://arxiv.org/abs/2405.10075},
+  author  = {Yuan, Kun and Srivastav, Vinkle and Navab, Nassir and Padoy, Nicolas},
+  year    = {2025},
+  volume  = {arXiv:2405.10075}
+}
+
+@article{loshchilov_fixing_2017,
+  title   = {Fixing weight decay regularization in adam},
+  journal = {arXiv},
+  author  = {Loshchilov, Ilya and Hutter, Frank and {others}},
+  year    = {2017},
+  volume  = {arXiv:1711.05101}
+}
