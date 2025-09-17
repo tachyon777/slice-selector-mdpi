@@ -234,11 +234,19 @@ This study was approved by Jichi Medical University Hospital Bioethics Committee
 We assembled our dataset from 137 consecutive gastrointestinal cancer patients who underwent their ﬁrst CT examination at our institution between 2021 and 2023. 
 First, a radiologist (Radiologist 1) with more than ten years of experience read each report and selected the appropriate CT series (e.g., the optimal contrast phase) for each finding sentence describing an abnormality. 
 The radiologist then chose the single CT slice that best matched that sentence and drew a bounding box around the lesion. 
-We divided the dataset into 92 training studies, 23 validation studies, and 22 test studies. 
+We divided the dataset into 92 training studies, 23 validation studies, and 22 test studies (Fig. \ref{fig:dataset_detail}). 
 In the test set, the radiologist also annotated the range of slices corresponding to each sentence to allow more detailed evaluation. 
 This yielded 625 sentence-slice pairs for training, 152 for validation, and 120 for testing. 
 The original reports were written in Japanese; after confirming that they contained no protected health information, we translated all finding sentences into English using \texttt{GPT-4o-mini} \cite{openai_gpt-4_2024}. 
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./figures/dataset_detail_1.png}
+  \caption{
+    Overview of dataset details and evaluation measures.
+  }
+  \label{fig:dataset_detail}
+\end{figure}
 
 % totalsegmentatorによるデータ拡張手法
 To improve performance on negative findings, we augmented the dataset with synthetic finding-image pairs that contain no abnormal findings. 
