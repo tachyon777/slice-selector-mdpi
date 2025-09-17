@@ -473,6 +473,9 @@ Despite training on a relatively small dataset, fine-tuned models achieved subst
 The best performer, BiomedCLIP (FT), reached 51\% Top-1 accuracy for lesion localization. 
 In the organ-aware task, all fine-tuned models realized over 10\% improvements in both accuracy and F1-score. 
 Notably, performance remained strong whether organ prompts were provided as single words or full sentences, demonstrating the flexibility of our text-encoding strategy. 
+Moreover, to examine robustness under external conditions, we conducted an additional organ-awareness evaluation on the publicly available CT-RATE dataset. 
+While all methods exhibited some degradation in performance due to domain shifts in imaging devices and acquisition protocols, the decrease was relatively modest, and BiomedCLIP(FT) consistently achieved the highest accuracy. 
+These findings suggest that our approach maintains robustness across datasets and can generalize beyond our in-house cohort.
 Our method paves the way for fully automated construction of MedVQA datasets from routine clinical archives, directly addressing biases and scale limitations inherent in bibliographic-based collections. 
 Furthermore, the radiologist evaluation of slice-selection results (Table \ref{tab:slice_selector_adoption}) and the visualization of similarity profiles (Fig. \ref{fig:organ_aware_results}) suggest that, in addition to serving as a VQA dataset generator, integrating the slice selector into clinical workflows as a recommendation tool could help reduce radiologists’ workload and enhance diagnostic accuracy. 
 
