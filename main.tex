@@ -263,6 +263,30 @@ Because ViT backbone requires 224 × 224 inputs, we first cropped 32 pixels from
 During training, we applied data augmentations such as horizontal and vertical flips, translations, scaling, rotations, elastic distortions, and cutout to improve model robustness \cite{devries_improved_2017}.
 
 
+\subsection{Slice-Selection Algorithm}  
+To operationalize our approach, we define a slice-selection algorithm that links each finding sentence to its most relevant CT slice. 
+As illustrated in Fig. \ref{fig:clip_overview}, the text encoder embeds the finding sentence, while the image encoder embeds each axial slice of the CT volume. 
+Cosine similarities are then computed between the sentence embedding and all slice embeddings. 
+The slice with the highest similarity score is designated as the key slice corresponding to the given finding. 
+This procedure, summarized in Alg. \ref{alg:key_slice_selection}, constitutes the inference pipeline of our method and serves as the foundation for both evaluation and fine-tuning.
+
+\begin{algorithm}
+  \caption{CLIP-based Key-Slice Selection}
+  \label{alg:key_slice_selection}
+  \begin{algorithmic}[1]
+    \REQUIRE finding sentence $f$, CT volume $V = \{s_1, \dots, s_N\}$, text encoder $E_{\mathrm{text}}$, image encoder $E_{\mathrm{img}}$
+    \ENSURE key slice $s_k$
+    \STATE $e_{\mathrm{text}} \leftarrow E_{\mathrm{text}}(f)$ 
+    \FOR{$i \leftarrow 1$ to $N$}
+      \STATE $e_{\mathrm{img}} \leftarrow E_{\mathrm{img}}(s_i)$ 
+      \STATE $\mathrm{sim}_i \leftarrow \cos\bigl(e_{\mathrm{text}}, e_{\mathrm{img}}\bigr)$ 
+    \ENDFOR
+    \STATE $k \leftarrow \arg\max_i \mathrm{sim}_i$ 
+    \RETURN $s_k$
+  \end{algorithmic}
+\end{algorithm}
+
+
 % 学習手法
 \subsection{Models and Training Details}
 We trained CLIP to learn correspondences between finding sentences and CT slices. 
@@ -285,24 +309,6 @@ Section \ref{sec:organ_aware} reports the alignment fidelity between organ-relat
 % In both settings, we compare two similarity scoring schemes: direct use of cosine similarity between text and image embeddings, 
 % and a case-specific scaling of similarity scores to account for inter-case variability. 
 Finally, Section \ref{sec:visualization} presents visualizations of the slice selection results on key series, illustrating both quantitative performance and qualitative interpretability.
-
-
-\begin{algorithm}
-  \caption{CLIP-based Key-Slice Selection}
-  \label{alg:key_slice_selection}
-  \begin{algorithmic}[1]
-    \REQUIRE finding sentence $f$, CT volume $V = \{s_1, \dots, s_N\}$, text encoder $E_{\mathrm{text}}$, image encoder $E_{\mathrm{img}}$
-    % \COMMENT{$e_{\mathrm{text}}, e_{\mathrm{img}} \in \mathbb{R}^d$: embedding vectors; $\mathrm{sim}_i$: cosine similarity score}
-    \ENSURE key slice $s_k$
-    \STATE $e_{\mathrm{text}} \leftarrow E_{\mathrm{text}}(f)$ 
-    \FOR{$i \leftarrow 1$ to $N$}
-      \STATE $e_{\mathrm{img}} \leftarrow E_{\mathrm{img}}(s_i)$ 
-      \STATE $\mathrm{sim}_i \leftarrow \cos\bigl(e_{\mathrm{text}}, e_{\mathrm{img}}\bigr)$ 
-    \ENDFOR
-    \STATE $k \leftarrow \arg\max_i \mathrm{sim}_i$ 
-    \RETURN $s_k$
-  \end{algorithmic}
-\end{algorithm}
 
 
 \subsection{Lesion Awareness}\label{sec:lesion_aware}
