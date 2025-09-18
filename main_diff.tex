@@ -298,10 +298,11 @@ During training, we applied data augmentations such as horizontal and vertical f
 We trained CLIP to learn correspondences between finding sentences and CT slices. 
 For the image encoder, we employed \texttt{ViT-B/16} and fine-tuned the pre-trained model using weights provided by OpenAI. 
 We applied the same procedure to PubMedCLIP and BiomedCLIP.
+\added{For all text encoders, the context length was set to 77 tokens, and sentences exceeding this length were truncated.}
 All training took place on a single NVIDIA RTX 6000 Ada GPU with a batch size of 64, using the AdamW optimizer \cite{loshchilov_fixing_2017}. 
 We decayed the learning rate from 5e-5 to 1e-6 over 20 epochs using cosine annealing. 
 Finally, we selected the checkpoint with the lowest validation loss for our evaluations.
-
+\added{The experiments were run on Ubuntu 22.04.5 LTS with Python~3.11.9 (conda-forge), using \texttt{numpy}~2.1.1, \texttt{torch}~2.4.1+cu118, and \texttt{TotalSegmentator}~2.10.0.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -517,6 +518,12 @@ Notably, performance remained strong whether organ prompts were provided as sing
   Moreover, to examine robustness under external conditions, we conducted an additional organ-awareness evaluation on the publicly available CT-RATE dataset. 
   While all methods exhibited some degradation in performance due to domain shifts in imaging devices and acquisition protocols, the decrease was relatively modest, and BiomedCLIP(FT) consistently achieved the highest accuracy. 
   These findings suggest that our approach maintains robustness across datasets and can generalize beyond our in-house cohort.
+}
+
+\added{
+  In terms of system requirements, all experiments were conducted on a single NVIDIA RTX 6000 Ada GPU with 48 GB memory, which was sufficient to train the models with a batch size of 64. 
+  Each training run of 20 epochs finished within one hour. 
+  These results indicate that our method can be reproduced on a high-end single-GPU workstation without requiring distributed resources.
 }
 
 \added{
