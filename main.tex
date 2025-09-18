@@ -527,7 +527,8 @@ and to implement VQA generation using both deterministic templates and generativ
 As these components mature, we will iteratively expand our clinical dataset and refine the slice selector’s accuracy. 
 Finally, we intend to train VLMs on the resulting automatically constructed MedVQA dataset and compare their performance against 
 models trained on manually curated slice annotations to quantify the impact of automated slice selection on downstream VLMs capabilities.
-
+In addition, recent large-scale VLMs such as Merlin, which align 3D CT volumes with radiology reports through contrastive learning, provide promising design principles\ref{blankemeier_merlin_2024}. 
+Incorporating similar volume-level representation strategies could further improve the accuracy of slice selection and enable more efficient MedVQA dataset construction.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
