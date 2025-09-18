@@ -525,11 +525,16 @@ the remaining steps are equally critical for end-to-end automation.
 Accordingly, we plan to develop and evaluate methods for report segmentation and image retrieval, 
 and to implement VQA generation using both deterministic templates and generative LLM prompts. 
 As these components mature, we will iteratively expand our clinical dataset and refine the slice selector’s accuracy. 
-Finally, we intend to train VLMs on the resulting automatically constructed MedVQA dataset and compare their performance against 
-models trained on manually curated slice annotations to quantify the impact of automated slice selection on downstream VLMs capabilities.
-In addition, recent large-scale VLMs such as Merlin, which align 3D CT volumes with radiology reports through contrastive learning, provide promising design principles\ref{blankemeier_merlin_2024}. 
-Incorporating similar volume-level representation strategies could further improve the accuracy of slice selection and enable more efficient MedVQA dataset construction.
+% Finally, we intend to train VLMs on the resulting automatically constructed MedVQA dataset and compare their performance against 
+% models trained on manually curated slice annotations to quantify the impact of automated slice selection on downstream VLMs capabilities.
+We also plan to train VLMs on the resulting automatically constructed MedVQA dataset and compare their performance against 
+models trained on manually curated slice annotations to quantify the impact of automated slice selection on downstream VLM capabilities.
 
+Beyond dataset construction, architectural advances offer another promising direction. 
+Recent large-scale VLMs such as Merlin, which align 3D CT volumes with radiology reports through contrastive learning, 
+provide useful design principles\cite{blankemeier_merlin_2024}. 
+Incorporating similar volume-level representation strategies, as well as techniques from the CLIP-Driven Universal Model that use text embeddings as semantic labels for segmentation and detection, 
+could extend our framework beyond slice retrieval toward finer-grained localization and more efficient MedVQA dataset construction\cite{10376801}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
 
