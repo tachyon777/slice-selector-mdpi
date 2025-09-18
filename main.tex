@@ -830,6 +830,32 @@ Since we generated 20 templates for each organ, we present only those for the li
   \label{fig:organ_aware_kidney}
 \end{figure}
 
+\clearpage
+
+\section{Impact of Organ-Aware Synthetic Data}\label{app:impact}
+To highlight the contribution of synthetic data generated from organ labels, we conducted an ablation study in which the models were fine-tuned only on report-derived lesion sentences, without using any organ-aware synthetic data. 
+Because the training set in this condition contained only 625 sentence–slice pairs (Fig. \ref{fig:dataset_detail}), we adopted a milder fine-tuning schedule with a learning rate decayed from 1e-5 to 1e-6 over 20 epochs. 
+We refer to this model as BiomedCLIP(lesion-FT). 
+Table \ref{tab:impact} compares the lesion-aware accuracy of BiomedCLIP, BiomedCLIP(lesion-FT), and BiomedCLIP(FT).
+The results show that BiomedCLIP(lesion-FT) achieved a higher Top-1 accuracy than the original BiomedCLIP baseline (45.98\% vs. 44.83\%) but remained inferior to BiomedCLIP(FT), which incorporated organ-aware synthetic data (51.72\%).
+These findings indicate that synthetic data are beneficial not only for organ-aware evaluation but also for improving lesion-aware performance.
+
+\begin{table}[ht]
+  \centering
+  \caption{Lesion-aware accuracy [\%] of BiomedCLIP variants. BiomedCLIP(lesion-FT) was fine-tuned only on lesion sentences without synthetic data.}
+  \label{tab:impact}
+  \begin{tabular}{lcc}
+    \toprule
+    Method                  & Acc.@1\,↑      & Acc.@5\,↑      \\
+    \midrule
+    BiomedCLIP              & 44.83       & 60.92       \\
+    BiomedCLIP(FT)          & 51.72       & 64.37       \\
+    BiomedCLIP(lesion-FT)   & 45.98       & 63.22       \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\isPreprints{}{% This command is only used for ``preprints''.
 \begin{adjustwidth}{-\extralength}{0cm}
