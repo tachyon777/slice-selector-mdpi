@@ -518,6 +518,14 @@ Notably, performance remained strong whether organ prompts were provided as sing
   While all methods exhibited some degradation in performance due to domain shifts in imaging devices and acquisition protocols, the decrease was relatively modest, and BiomedCLIP(FT) consistently achieved the highest accuracy. 
   These findings suggest that our approach maintains robustness across datasets and can generalize beyond our in-house cohort.
 }
+
+\added{
+  Beyond our own dataset, the proposed slice-selection framework offers practical benefits when applied to diverse imaging archives. 
+  First, by automatically aligning report sentences with key slices, it can substantially reduce the cost of 2D slice-level annotation, which is often the major bottleneck in dataset curation. 
+  Second, it enables the construction of image-text pairs directly from unlabeled CT volumes and routine reports, providing a low-cost pathway to expand training resources for medical VLMs. 
+  These improvements highlight the broader utility of our method across datasets and institutions, extending its impact beyond the present feasibility study.
+}
+
 Our method paves the way for fully automated construction of MedVQA datasets from routine clinical archives, directly addressing biases and scale limitations inherent in bibliographic-based collections. 
 Furthermore, the radiologist evaluation of slice-selection results (Table \ref{tab:slice_selector_adoption}) and the visualization of similarity profiles (Fig. \ref{fig:organ_aware_results}) suggest that, in addition to serving as a VQA dataset generator, integrating the slice selector into clinical workflows as a recommendation tool could help reduce radiologists’ workload and enhance diagnostic accuracy. 
 
@@ -863,7 +871,7 @@ Since we generated 20 templates for each organ, we present only those for the li
 \section{\added{Impact of Organ-Aware Synthetic Data}}\label{app:impact}
 \added{
   To highlight the contribution of synthetic data generated from organ labels, we conducted an ablation study in which the models were fine-tuned only on report-derived lesion sentences, without using any organ-aware synthetic data. 
-  Because the training set in this condition contained only 625 sentence–slice pairs (Fig. \ref{fig:dataset_detail}), we adopted a milder fine-tuning schedule with a learning rate decayed from 1e-5 to 1e-6 over 20 epochs. 
+  Because the training set in this condition contained only 625 sentence-slice pairs (Fig. \ref{fig:dataset_detail}), we adopted a milder fine-tuning schedule with a learning rate decayed from 1e-5 to 1e-6 over 20 epochs. 
   We refer to this model as BiomedCLIP(lesion-FT). 
   Table \ref{tab:impact} compares the lesion-aware accuracy of BiomedCLIP, BiomedCLIP(lesion-FT), and BiomedCLIP(FT).
   The results show that BiomedCLIP(lesion-FT) achieved a higher Top-1 accuracy than the original BiomedCLIP baseline (45.98\% vs. 44.83\%) but remained inferior to BiomedCLIP(FT), which incorporated organ-aware synthetic data (51.72\%).
