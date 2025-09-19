@@ -201,14 +201,11 @@ PMC-VQA constructs a 227K example VQA dataset, predominantly composed of radiolo
 This dataset was built by mining images and their associated captions from the articles and employing ChatGPT to generate the corresponding VQA pairs.
 LLava-Med adopts a similar strategy. It first trains on 600K image-caption pairs mined from PubMed Central articles. 
 It then refines the model with 60K GPT-4-generated instruction-tuning examples \cite{li_llava-med_2023}.
-
+However, none of these datasets provide explicit links between report sentences and specific CT slices, which is the key challenge our study addresses.
 
 % Extraction of slices from Volumetric Dataとか？
 \subsection{Slice Selection}
-Vote-MI proposes a method for extracting the most representative slices in 3D MRI volumes of brain tumor cases \cite{wang_enhancing_2024}. 
-The method first employs a variational autoencoder to extract latent features from each slice, then applies clustering to select the key slice for each case. 
-Training VLMs on the resulting dataset yields effective learning, although performance remains below that achieved with expert-curated datasets. 
-Because Vote-MI does not incorporate any textual information during slice selection, its applicability is limited to brain tumor imaging and cannot readily extend to other anatomical regions or to multiple disease types.
+Vote-MI has been proposed as a weakly supervised method to identify representative key slices from CT volumes\cite{wang_enhancing_2024}. While effective in highlighting diagnostically relevant slices, Vote-MI is designed for slice selection alone and does not provide a mechanism for sentence-level text–image retrieval. This limits its applicability for tasks such as MedVQA dataset construction, where fine-grained alignment between report sentences and CT slices is required. In contrast, our method explicitly addresses this gap by enabling text-driven slice retrieval and further improving alignment performance through lesion- and organ-aware fine-tuning.
 Although no prior study has applied CLIP to slice-selection, related methods for extracting key frames from sequential medical data have been employed in zero-shot surgical phase recognition \cite{yuan_hecvl_2025}.
 
 
@@ -225,6 +222,7 @@ BiomedCLIP expands this approach by assembling a PMC-15M dataset from PubMed Cen
 These biomedical variants achieve SOTA performance on cross-modal retrieval, zero-shot image classification, and MedVQA tasks, establishing themselves as foundation models for a wide range of downstream medical-AI applications \cite{koleilat_medclip-sam_2024,zhao_foundation_2024,polis_exploring_2025}.
 
 
+In summary, while previous work has advanced MedVQA dataset creation, slice retrieval, and multimodal learning, none has proposed an automated framework that aligns report sentences with CT slices and enhances performance through lesion- and organ-aware fine-tuning. This forms the core novelty of our work.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -293,13 +291,27 @@ This procedure, summarized in Alg. \ref{alg:key_slice_selection}, constitutes th
 \subsection{Models and Training Details}
 We trained CLIP to learn correspondences between finding sentences and CT slices. 
 For the image encoder, we employed \texttt{ViT-B/16} and fine-tuned the pre-trained model using weights provided by OpenAI. 
-We applied the same procedure to PubMedCLIP and BiomedCLIP.
+We applied the same procedure to PubMedCLIP and BiomedCLIP. We summarize the image encoders and text encoders used in each method in Table \ref{tab:model_summary}.
 For all text encoders, the context length was set to 77 tokens, and sentences exceeding this length were truncated.
 All training took place on a single NVIDIA RTX 6000 Ada GPU with a batch size of 64, using the AdamW optimizer \cite{loshchilov_fixing_2017}. 
 We decayed the learning rate from 5e-5 to 1e-6 over 20 epochs using cosine annealing. 
 Finally, we selected the checkpoint with the lowest validation loss for our evaluations.
 The experiments were run on Ubuntu 22.04.5 LTS with Python~3.11.9 (conda-forge), using \texttt{numpy}~2.1.1, \texttt{torch}~2.4.1+cu118, and \texttt{TotalSegmentator}~2.10.0.
 
+\begin{table}[ht]
+  \centering
+  \caption{Summary of image and text encoders used in each method.}
+  \label{tab:model_summary}
+  \begin{tabular}{lcc}
+    \toprule
+    Method                  & Image Encoder      & Text Encoder      \\
+    \midrule
+    CLIP                    & ViT-B/16          & Transformer       \\
+    PubMedCLIP              & ViT-B/32          & Transformer       \\
+    BiomedCLIP              & ViT-B/16          & PubMedBERT        \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Results}
