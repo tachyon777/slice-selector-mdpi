@@ -318,12 +318,28 @@ The experiments were run on Ubuntu 22.04.5 LTS with Python~3.11.9 (conda-forge),
 
 % セクション全体の説明
 We evaluated the slice selection performance of six models: the pre-trained CLIP, PubMedCLIP, and BiomedCLIP, along with their fine-tuned counterparts (FT). 
+Before reporting task-specific retrieval metrics, we first verified whether each model had learned meaningful alignments during training. To this end, we measured the mean absolute error (MAE) between the predicted and ground-truth slice indices under two strategies: hard prediction (selecting the top-1 slice) and soft prediction (using a local moving average).
 In Section \ref{sec:lesion_aware}, we assess retrieval accuracy on sentences describing actual abnormal findings from diagnostic reports. 
 In addition, we conducted a radiologist evaluation of the slice-selection results to examine clinical applicability.
 Section \ref{sec:organ_aware} reports the alignment fidelity between organ-related text and its corresponding CT slices. 
-% In both settings, we compare two similarity scoring schemes: direct use of cosine similarity between text and image embeddings, 
-% and a case-specific scaling of similarity scores to account for inter-case variability. 
 Finally, Section \ref{sec:visualization} presents visualizations of the slice selection results on key series, illustrating both quantitative performance and qualitative interpretability.
+
+
+\subsection{Training Verification via Slice-Level MAE}
+To validate the training process, we measured the mean absolute error (MAE) between the predicted and ground-truth slice indices across all models using the image-sentence pairs from the validation set. 
+We compared two strategies: (i) hard prediction, which directly selects the slice with the highest similarity score, and (ii) soft prediction, which applies a moving average over $\pm$2 neighboring slices to exploit the sequential continuity of CT volumes. 
+As shown in Fig. \ref{fig:mae}, fine-tuned models consistently achieved lower MAE than their pre-trained counterparts, confirming that meaningful learning occurred. 
+Moreover, the soft prediction strategy yielded lower errors than hard prediction, motivating our decision to adopt the soft prediction setting for all subsequent evaluations. For example, in BiomedCLIP, the MAE improved from $10.40 \pm 13.58$ with hard prediction to $9.21 \pm 11.09$ with soft prediction, corresponding to an average gain of approximately one slice in localization accuracy.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./figures/mae.png}
+  \caption{
+    Comparison of mean absolute error (MAE) between predicted and ground-truth slice indices for each method. 
+    Both hard prediction (top-1 slice) and soft prediction (moving average over $\pm$2 slices) are shown.
+  }
+  \label{fig:mae}
+\end{figure}
 
 
 \subsection{Lesion Awareness}\label{sec:lesion_aware}
