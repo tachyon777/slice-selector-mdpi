@@ -164,7 +164,9 @@ Although a VQA dataset has been curated from routine chest-radiograph reports, n
 One key reason is that reports are not annotated to show which sentence belongs to which slice, and we still lack automated tools to add those links, making it hard to build large, clinically sourced MedVQA datasets. 
 Some studies have experimented with VLMs that use 3D encoders, pairing a full image volume with the entire report; however, these models require heavy computational resources, and many state-of-the-art (SOTA) VLMs still operate on 2D inputs \cite{bai_m3d_2024,blankemeier_merlin_2024,hamamci_ct2rep_2024}. 
 Moreover, everyday radiology communication—whether in report snapshots, electronic medical record attachments, or conference slides—still revolves around just a few key 2D images, so slice-level tasks will remain indispensable in clinical practice. 
-Therefore, an automated key-slice selector that links each report sentence to the 2D slice that best matches its described finding is essential for building the datasets needed to advance clinically useful VLMs in radiology. 
+\deleted{Therefore, an automated key-slice selector that links each report sentence to the 2D slice that best matches its described finding is essential for building the datasets needed to advance clinically useful VLMs in radiology.} 
+\added{An automated key-slice selector that links each report sentence to the 2D slice that best matches its described finding is therefore essential for building the datasets needed to advance clinically useful VLMs in radiology.
+The key motivation of this work is to establish such a method, bridging report sentences and CT slices to make the construction of clinically realistic MedVQA datasets feasible at scale.}
 
 % Fig. 1
 \begin{figure}[ht]
@@ -180,6 +182,7 @@ Therefore, an automated key-slice selector that links each report sentence to th
 
 
 % 2. 本研究で提案するSlice Selectorの概要
+\added{In this study, we aim to clarify the utility of a slice-selection framework that aligns report sentences with CT slices and to examine whether fine-tuning with lesion- and organ-aware supervision can further enhance performance.}
 CLIP jointly embeds images and text into a common latent space and computes cosine similarity between these embeddings to perform zero-shot classiﬁcation and text-image retrieval \cite{radford_learning_2021}. 
 We hypothesize that this same framework could be repurposed to align individual report sentences with their corresponding CT slices. 
 Each finding sentence is embedded by the text encoder, and every axial slice in the volume is embedded by the image encoder; the slice with the highest cosine similarity is chosen as the key image for that sentence (Fig. \ref{fig:clip_overview}). 
