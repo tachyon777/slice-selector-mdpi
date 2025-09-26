@@ -124,7 +124,7 @@
 % Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
 \address{%
 $^{1}$ \quad Department of Radiology, School of Medicine, Jichi Medical University; yamamoto.kohei@jichi.ac.jp\\
-$^{2}$ \quad Data Science Center, Jichi Medical University; r1419kt@jichi.ac.jp}
+$^{2}$ \quad Data Science Center, Jichi Medical Universit; r1419kt@jichi.ac.jp}
 
 % Contact information of the corresponding author
 \corres{Correspondence: yamamoto.kohei@jichi.ac.jp}
@@ -141,7 +141,7 @@ $^{2}$ \quad Data Science Center, Jichi Medical University; r1419kt@jichi.ac.jp}
 %\conference{} % An extended version of a conference paper
 
 % Abstract (Do not insert blank lines, i.e. \\) 
-\abstract{Large-scale medical visual question answering (MedVQA) datasets are critical for training and deploying vision-language models (VLMs) in radiology. Ideally, such datasets would be mined automatically from routine radiology reports and their accompanying images, yet no existing method links free-text findings to the relevant 2D slices in volumetric scans. We bridge this gap with a CLIP-based key-slice selector that matches each finding sentence to its most informative CT slice via text-image similarity. Our experiments show that models pre-trained on the medical domain already provide relatively good slice-retrieval accuracy, and that fine-tuning them on a small dual-supervised dataset that imparts both lesion- and organ-level awareness yields further gains. \added{In particular, the best-performing model (BiomedCLIP fine-tuned) achieved a Top-1 accuracy of 51.7\% for lesion-aware slice retrieval, a 20-point improvement over baseline CLIP, and was accepted by radiologists in 56.3\% of cases.} By automating report-to-slice alignment, the proposed method enables scalable, clinical-data-driven construction of MedVQA resources.
+\abstract{Large-scale medical visual question answering (MedVQA) datasets are critical for training and deploying vision-language models (VLMs) in radiology. Ideally, such datasets should be automatically constructed from routine radiology reports and their corresponding images. However, no existing method directly links free-text findings to the most relevant 2D slices in volumetric computed tomography (CT) scans. To address this gap, a contrastive language–image pre-training (CLIP)-based key-slice selection framework is proposed, which matches each sentence to its most informative CT slice via text-image similarity. This experiment demonstrates that models pre-trained in the medical domain already achieve competitive slice retrieval accuracy, and that fine-tuning them on a small dual-supervised dataset that imparts both lesion- and organ-level awareness yields further gains. \added{In particular, the best-performing model (fine-tuned BiomedCLIP) achieved a Top-1 accuracy of 51.7\% for lesion-aware slice retrieval, representing a 20-point improvement over baseline CLIP, and was accepted by radiologists in 56.3\% of cases.} By automating the report-to-slice alignment, the proposed method facilitates scalable, clinically realistic construction of MedVQA resources.
 }
 
 % Keywords
@@ -156,25 +156,25 @@ $^{2}$ \quad Data Science Center, Jichi Medical University; r1419kt@jichi.ac.jp}
 
 % 1. 現状のMedVQAの進展とその問題点
 Recent advances in vision-language models (VLMs) have been driven by joint learning from paired image-text inputs \cite{li_llava-next-interleave_2024,xiao_florence-2_2024,chen_internvl_2024,alayrac_flamingo_2022}. 
-In medical VLM research, medical visual question answering (MedVQA) is the de-facto benchmark task, where a model answers questions by jointly processing a medical image and the corresponding findings sentence(s) \cite{lau_dataset_2018,liu_slake_2021}. 
-To scale training, most work mines figures and captions from large bibliographic databases and then uses large language models (LLMs) to synthesize VQA pairs \cite{zhang_pmc-vqa_2024,li_llava-med_2023}. 
-While effective, these bibliographic-based datasets over-represent prototypical cases and may fail to capture the heterogeneity of real-world clinical presentations, potentially degrading model performance in practice \cite{zhang_pmc-vqa_2024,dong_generative_2025}. 
-Consequently, constructing MedVQA datasets directly from routine clinical data would bridge this realism gap and could even exceed the scale of bibliographic-based collections. 
-Although a VQA dataset has been curated from routine chest-radiograph reports, no comparable resource has yet been created for volumetric modalities such as CT or MRI \cite{bae_ehrxqa_2024}. 
-One key reason is that reports are not annotated to show which sentence belongs to which slice, and we still lack automated tools to add those links, making it hard to build large, clinically sourced MedVQA datasets. 
-Some studies have experimented with VLMs that use 3D encoders, pairing a full image volume with the entire report; however, these models require heavy computational resources, and many state-of-the-art (SOTA) VLMs still operate on 2D inputs \cite{bai_m3d_2024,blankemeier_merlin_2024,hamamci_ct2rep_2024}. 
-Moreover, everyday radiology communication—whether in report snapshots, electronic medical record attachments, or conference slides—still revolves around just a few key 2D images, so slice-level tasks will remain indispensable in clinical practice. 
+Medical visual question answering (MedVQA) has become a benchmark task in this domain, requiring a model to answer questions by jointly processing a medical image and the corresponding sentence(s) \cite{lau_dataset_2018,liu_slake_2021}. 
+To scale training, most studies mine figures and captions from large bibliographic databases and then employ large language models (LLMs) to synthesize visual question answering (VQA) pairs \cite{zhang_pmc-vqa_2024,li_llava-med_2023}. 
+Although effective, these bibliography-based datasets overrepresent prototypical cases and often fail to capture the heterogeneity of real-world clinical presentations, potentially reducing the model performance in practice \cite{zhang_pmc-vqa_2024,dong_generative_2025}. 
+Consequently, constructing MedVQA datasets directly from routine clinical data is a critical next step and could even surpass the scale of bibliography-based collections. 
+Although a VQA dataset has been curated from routine chest radiograph reports, no comparable resource currently exists for volumetric modalities such as computed tomography (CT) or magnetic resonance imaging (MRI) \cite{bae_ehrxqa_2024}. 
+A major barrier is that clinical reports are not annotated to show which sentence corresponds to which slice, and automated tools for establishing these links remain underdeveloped, hindering the construction of large, clinically sourced MedVQA datasets. 
+Some studies have explored VLMs that use 3D encoders that pair a full image volume with the entire report; however, these models require substantial computational resources, and many state-of-the-art (SOTA) VLMs still operate on 2D inputs \cite{bai_m3d_2024,blankemeier_merlin_2024,hamamci_ct2rep_2024}. 
+Moreover, everyday radiology communication—whether in report snapshots, electronic medical record attachments, or conference presentations—continues to rely on a limited set of representative 2D slices; thus, slice-level tasks remain indispensable in clinical practice. 
 \deleted{Therefore, an automated key-slice selector that links each report sentence to the 2D slice that best matches its described finding is essential for building the datasets needed to advance clinically useful VLMs in radiology.} 
 \added{An automated key-slice selector that links each report sentence to the 2D slice that best matches its described finding is therefore essential for building the datasets needed to advance clinically useful VLMs in radiology.
-The key motivation of this work is to establish such a method, bridging report sentences and CT slices to make the construction of clinically realistic MedVQA datasets feasible at scale.}
+The key motivation of this work is to establish such a method, bridging report sentences and CT slices to enable scalable construction of clinically realistic MedVQA datasets at this scale.}
 
 % Fig. 1
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.8\textwidth]{./figures/figure1_9.png}
   \caption{
-    Overview of our CLIP-based slice-selection pipeline. 
-    Each finding sentence is encoded by the text encoder and every CT slice by the image encoder. 
+    Overview of the proposed contrastive language-image pre-training (CLIP)-based slice-selection pipeline. 
+    Each report sentence is encoded by the text encoder, and each CT slice by the image encoder. 
     Cosine similarities are computed between the sentence embedding and all slice embeddings, and the slice with the highest score is chosen as the key slice for that finding. 
 }
   \label{fig:clip_overview}
@@ -182,12 +182,12 @@ The key motivation of this work is to establish such a method, bridging report s
 
 
 % 2. 本研究で提案するSlice Selectorの概要
-\added{In this study, we aim to clarify the utility of a slice-selection framework that aligns report sentences with CT slices and to examine whether fine-tuning with lesion- and organ-aware supervision can further enhance performance.}
-CLIP jointly embeds images and text into a common latent space and computes cosine similarity between these embeddings to perform zero-shot classiﬁcation and text-image retrieval \cite{radford_learning_2021}. 
-We hypothesize that this same framework could be repurposed to align individual report sentences with their corresponding CT slices. 
-Each finding sentence is embedded by the text encoder, and every axial slice in the volume is embedded by the image encoder; the slice with the highest cosine similarity is chosen as the key image for that sentence (Fig. \ref{fig:clip_overview}). 
-We evaluate this pipeline with the original CLIP (ViT-B/16) and two medical-domain variants, PubMedCLIP and BiomedCLIP \cite{radford_learning_2021,eslami_pubmedclip_2023,zhang_biomedclip_2025}. 
-In addition, we curated a compact training set drawn from a limited number of clinical CT studies and fine-tuned each model on this dataset. 
+\added{This study aims to demonstrate the utility of a slice-selection framework that aligns report sentences with CT slices and to investigate whether fine-tuning with lesion- and organ-aware supervision can further enhance performance.}
+Contrastive language-image pre-training (CLIP) jointly embeds images and text into a shared latent space and computes cosine similarity between these embeddings to enable zero-shot classiﬁcation and text-image retrieval \cite{radford_learning_2021}. 
+We hypothesized that the same framework could be adapted to align individual report sentences with their corresponding CT slices. 
+Each finding sentence was encoded by the text encoder, and every axial slice in the CT volume was encoded by the image encoder; the slice with the highest cosine similarity was selected as the key image for that sentence (Fig. \ref{fig:clip_overview}). 
+This pipeline was evaluated using the original CLIP (ViT-B/16) and two medical-domain variants, PubMedCLIP and BiomedCLIP \cite{radford_learning_2021,eslami_pubmedclip_2023,zhang_biomedclip_2025}. 
+In addition, we curated a compact training set from a limited number of clinical CT studies and fine-tuned each model using this dataset. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -195,43 +195,42 @@ In addition, we curated a compact training set drawn from a limited number of cl
 
 \section{Related Works}
 \subsection{MedVQA Dataset Construction}
-VQA-RAD is a foundational MedVQA benchmark for radiological images. 
-Expert radiologists manually authored clinical questions and provided corresponding ground-truth answers, ensuring high annotation quality but resulting in a relatively small dataset \cite{lau_dataset_2018}. 
-SLAKE builds on this by adding spatial annotations—such as pixel-level masks and bounding boxes—and by including knowledge-base-driven questions to probe deeper clinical reasoning \cite{liu_slake_2021}.
-Effective training of VLMs in the highly specialized medical domain requires much larger and more diverse datasets. 
-PMC-VQA constructs a 227K example VQA dataset, predominantly composed of radiological images, using literature extracted from PubMed Central \cite{zhang_pmc-vqa_2024}.
-This dataset was built by mining images and their associated captions from the articles and employing ChatGPT to generate the corresponding VQA pairs.
-LLava-Med adopts a similar strategy. It first trains on 600K image-caption pairs mined from PubMed Central articles. 
-It then refines the model with 60K GPT-4-generated instruction-tuning examples \cite{li_llava-med_2023}.
-\added{However, none of these datasets provide explicit links between report sentences and specific CT slices, which is the key challenge our study addresses.}
+VQA-RAD is a foundational MedVQA benchmark for radiological imaging. 
+Expert radiologists manually authored clinical questions and provided the corresponding ground-truth answers, ensuring high annotation quality but resulting in a relatively small dataset \cite{lau_dataset_2018}. 
+SLAKE builds on this by adding spatial annotations, such as pixel-level masks and bounding boxes, and by including knowledge-base-driven questions to probe deeper clinical reasoning \cite{liu_slake_2021}.
+The effective training of VLMs in highly specialized medical domains requires much larger and more diverse datasets. 
+PMC-VQA constructs a 227-K example VQA dataset, predominantly composed of radiological images, using literature extracted from PubMed Central \cite{zhang_pmc-vqa_2024}.
+This dataset was built by mining images and their associated captions from articles and employing ChatGPT to generate the corresponding VQA pairs.
+LLava-Med adopts a similar strategy: it first trains 600K image-caption pairs mined from PubMed Central articles and then fine-tunes the model with 60K GPT-4-generated instruction-tuning examples \cite{li_llava-med_2023}.
+\added{However, none of these datasets provide explicit links between report sentences and specific CT slices, which is the key challenge this study addresses.}
 
 % Extraction of slices from Volumetric Dataとか？
 \subsection{Slice Selection}
 \replaced{
-  Vote-MI has been proposed as a weakly supervised method to identify representative key slices from CT volumes\cite{wang_enhancing_2024}. While effective in highlighting diagnostically relevant slices, Vote-MI is designed for slice selection alone and does not provide a mechanism for sentence-level text–image retrieval. This limits its applicability for tasks such as MedVQA dataset construction, where fine-grained alignment between report sentences and CT slices is required. In contrast, our method explicitly addresses this gap by enabling text-driven slice retrieval and further improving alignment performance through lesion- and organ-aware fine-tuning.
+  Vote-MI was proposed as a weakly supervised method for identifying representative key slices from CT volumes \cite{wang_enhancing_2024}. Although effective in highlighting diagnostically relevant slices, Vote-MI is designed for slice selection alone and does not provide a mechanism for sentence-level text–image retrieval. This limits its applicability to tasks such as MedVQA dataset construction, where fine-grained alignment between report sentences and CT slices is required. In contrast, our method explicitly addresses this gap by enabling text-driven slice retrieval and further improving alignment performance through lesion- and organ-aware fine-tuning.
 }{
-  Vote-MI proposes a method for extracting the most representative slices in 3D MRI volumes of brain tumor cases \cite{wang_enhancing_2024}. 
-  The method first employs a variational autoencoder to extract latent features from each slice, then applies clustering to select the key slice for each case. 
-  Training VLMs on the resulting dataset yields effective learning, although performance remains below that achieved with expert-curated datasets. 
-  Because Vote-MI does not incorporate any textual information during slice selection, its applicability is limited to brain tumor imaging and cannot readily extend to other anatomical regions or to multiple disease types.
+  Vote-MI proposed a method for extracting the most representative slices from 3D MRI volumes of brain tumor cases \cite{wang_enhancing_2024}. 
+  The method first employs a variational autoencoder to extract latent features from each slice and then applies clustering to select the key slice for each case. 
+  Training the VLMs on the resulting dataset yielded effective learning, although the performance remained below that achieved using expert-curated datasets. 
+  Because Vote-MI does not incorporate textual information during slice selection, its applicability is limited to brain tumor imaging and cannot be readily extended to other anatomical regions or multiple disease types.
 }
-Although no prior study has applied CLIP to slice-selection, related methods for extracting key frames from sequential medical data have been employed in zero-shot surgical phase recognition \cite{yuan_hecvl_2025}.
+Although no prior studies have applied CLIP to slice selection, related methods for extracting keyframes from sequential medical data have been employed for zero-shot surgical phase recognition \cite{yuan_hecvl_2025}.
 
 
 % CLIPの説明
 \subsection{Multi Modal Learning}
-With the advent of CLIP, contrastive learning has become a predominant paradigm for multimodal representation learning \cite{radford_learning_2021}. 
-CLIP projects textual and visual inputs into a shared embedding space by encoding each modality separately—text via a transformer-based text encoder and images via a vision transformer—then aligns them through cosine similarity. 
-This cross-modal alignment capability has prompted many researchers to employ the CLIP image encoder as the visual backbone in VLMs. 
-Later works have built on this foundation to better support downstream tasks. For example, GLIP and RegionCLIP introduce region-level contrastive objectives that enhance object detection and semantic segmentation performance \cite{li_grounded_2022,zhong_regionclip_2022}.
-SigLIP further innovates by replacing the standard contrastive loss with a sigmoid-cross-entropy formulation, substantially reducing text-encoder context length while maintaining high-efficiency multimodal learning \cite{zhai_sigmoid_2023}. 
+With the advent of CLIP, contrastive learning has become the predominant paradigm in multimodal representation learning \cite{radford_learning_2021}. 
+CLIP projects textual and visual inputs into a shared embedding space by encoding each modality separately—text via a transformer-based text encoder and images via a vision transformer—and then aligns them through cosine similarity. 
+This cross-modal alignment capability has led many researchers to employ CLIP image encoders as the visual backbone in VLMs. 
+Subsequent studies extended this foundation to better support downstream tasks. For example, GLIP and RegionCLIP introduce region-level contrastive objectives that improve object detection and semantic segmentation performance \cite{li_grounded_2022,zhong_regionclip_2022}.
+SigLIP replaces the standard contrastive loss with a sigmoid cross-entropy formulation, substantially reducing the text-encoder context length while maintaining high-efficiency multimodal learning \cite{zhai_sigmoid_2023}. 
 CLIP-Adapter enhances few-shot transfer by inserting lightweight adapter modules into a frozen CLIP backbone, thereby boosting performance on downstream tasks without extensive retraining \cite{gao_clip-adapter_2024}. 
-In the medical domain, PubMedCLIP fine-tunes CLIP on ROCO, a radiology-focused corpus derived from PubMed articles \cite{eslami_pubmedclip_2023,pelka_radiology_2018}. 
-BiomedCLIP expands this approach by assembling a PMC-15M dataset from PubMed Central publications and using it for further CLIP fine-tuning \cite{zhang_biomedclip_2025}. 
-These biomedical variants achieve SOTA performance on cross-modal retrieval, zero-shot image classification, and MedVQA tasks, establishing themselves as foundation models for a wide range of downstream medical-AI applications \cite{koleilat_medclip-sam_2024,zhao_foundation_2024,polis_exploring_2025}.
+In the medical domain, PubMedCLIP fine-tunes CLIP using ROCO, a radiology-focused corpus derived from PubMed articles \cite{eslami_pubmedclip_2023,pelka_radiology_2018}. 
+BiomedCLIP expands this approach by assembling a PMC-15M dataset from PubMed Central publications and applying it to further fine-tune CLIP \cite{zhang_biomedclip_2025}. 
+These biomedical variants have achieved SOTA performance in cross-modal retrieval, zero-shot image classification, and MedVQA tasks, thereby establishing themselves as foundation models for a broad range of downstream medical AI applications \cite{koleilat_medclip-sam_2024,zhao_foundation_2024,polis_exploring_2025}.
 
 
-\added{In summary, while previous work has advanced MedVQA dataset creation, slice retrieval, and multimodal learning, none has proposed an automated framework that aligns report sentences with CT slices and enhances performance through lesion- and organ-aware fine-tuning. This forms the core novelty of our work.}
+\added{In summary, while previous research has advanced MedVQA dataset construction, slice retrieval, and multimodal learning, none has proposed an automated framework that aligns report sentences with CT slices and enhances performance through lesion- and organ-aware fine-tuning. This constitutes the novelty of the present study.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -239,48 +238,48 @@ These biomedical variants achieve SOTA performance on cross-modal retrieval, zer
 
 \subsection{Dataset}\label{sec:dataset}
 % データセット概要
-\replaced{This study was approved by Jichi Medical University Hospital Bioethics Committee for Clinical Research (Approval No. 24-061).}{This study was approved by the ethics review board of our institution.} 
-We assembled our dataset from 137 consecutive gastrointestinal cancer patients who underwent their ﬁrst CT examination at our institution between 2021 and 2023. 
-First, a radiologist (Radiologist 1) with more than ten years of experience read each report and selected the appropriate CT series (e.g., the optimal contrast phase) for each finding sentence describing an abnormality. 
-The radiologist then chose the single CT slice that best matched that sentence and drew a bounding box around the lesion. 
-We divided the dataset into 92 training studies, 23 validation studies, and 22 test studies \added{(Fig. \ref{fig:dataset_detail})}. 
-In the test set, the radiologist also annotated the range of slices corresponding to each sentence to allow more detailed evaluation. 
+\replaced{This study was approved by the ethics review board of our institution.}{This study was approved by Jichi Medical University Hospital Bioethics Committee for Clinical Research (Approval No. 24-061).} 
+We assembled our dataset from 137 consecutive patients with gastrointestinal cancer who underwent their ﬁrst CT examination at our institution between 2021 and 2023. 
+A board-certified radiologist (Radiologist 1) with more than ten years of experience reviewed each report and selected the appropriate CT series (e.g., optimal contrast phase) for each sentence describing an abnormality. 
+The radiologist then identified the CT slice that best matched the sentence and annotated the lesion with a bounding box. 
+The dataset was divided into 92 training, 23 validation, and 22 test studies \added{(Fig. \ref{fig:dataset_detail})}. 
+For the test set, the radiologist annotated the range of slices corresponding to each sentence to enable more detailed evaluation. 
 This yielded 625 sentence-slice pairs for training, 152 for validation, and 120 for testing. 
-The original reports were written in Japanese; after confirming that they contained no protected health information, we translated all finding sentences into English using \texttt{GPT-4o-mini} \cite{openai_gpt-4_2024}. 
+The original reports were written in Japanese; after confirming that they contained no protected health information, all sentences were translated into English using \texttt{GPT-4o-mini} \cite{openai_gpt-4_2024}. 
 
 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.8\textwidth]{./figures/dataset_detail_1.png}
   \caption{
-    \added{New figure added in revision} Overview of dataset details and evaluation measures.
+    \added{New figure added in revision.} Overview of dataset composition and evaluation measures.
   }
   \label{fig:dataset_detail}
 \end{figure}
 
 
 % totalsegmentatorによるデータ拡張手法
-To improve performance on negative findings, we augmented the dataset with synthetic finding-image pairs that contain no abnormal findings. 
-We first applied TotalSegmentator to each CT series to extract organ masks and determine which of the 15 major thoracoabdominal organs were present for each slice \cite{wasserthal_totalsegmentator_2023}. 
-Using these organ labels, we generated pseudo-findings in two ways: by inserting organ names into a fixed template and by prompting \texttt{GPT-4o-mini} to produce natural-language descriptions based on the same templates. 
-Further details of our rule-based and LLM-based prompt designs are provided in Appendix \ref{app:rule_based_text_prompt}.
+To improve performance on negative findings, we augmented the dataset with synthetic finding–image pairs containing no abnormalities. 
+We first applied the TotalSegmentator to each CT series to extract organ masks and determine which of the 15 major thoracoabdominal organs were present in each slice \cite{wasserthal_totalsegmentator_2023}. 
+Using these organ labels, we generated pseudo-findings in two ways: (1) inserting organ names into a fixed template and (2) prompting \texttt{GPT-4o-mini} to produce natural language descriptions based on the same templates. 
+Further details of the rule- and LLM-based prompt designs are provided in Appendix \ref{app:rule_based_text_prompt}.
 
 
 % 最終的な学習データセット
-For lesion-positive examples, we expanded the slice range based on lesion size: bounding boxes larger than 2,000 pixels were padded by one slice above and below, while boxes exceeding 4,000 and 6,000 pixels received two- and three-slice expansions, respectively. 
-This procedure yielded a training set composed of 12,743 CT slices, including 1,009 lesion-positive finding-image pairs and 140,761 normal-anatomy pairs generated from organ labels.
-As part of image preprocessing, we applied soft-tissue windowing to the CT values to enhance contrast in relevant intensity ranges. 
-Because ViT backbone requires 224 × 224 inputs, we first cropped 32 pixels from each edge of the original 512 × 512 slices to obtain 448 × 448 images and then downsampled them to 224 × 224. 
-During training, we applied data augmentations such as horizontal and vertical flips, translations, scaling, rotations, elastic distortions, and cutout to improve model robustness \cite{devries_improved_2017}.
+For lesion-positive examples, we expanded the slice range based on lesion size. Bounding boxes larger than 2,000 pixels were padded by one slice above and below, whereas boxes exceeding 4,000 and 6,000 pixels were expanded by two and three slices, respectively. 
+This procedure yielded a training set composed of 12,743 CT slices, including 1,009 lesion-positive image pairs and 140,761 normal anatomy pairs generated from organ labels.
+As part of image preprocessing, we applied soft-tissue windowing to the CT values to enhance contrast in the relevant intensity ranges. 
+Because the vision transformer (ViT) backbone requires 224 × 224 inputs, we first cropped 32 pixels from each edge of the original 512 × 512 slices to obtain 448 × 448 images and then downsampled them to 224 × 224 pixels. 
+During training, we applied data augmentation, such as horizontal and vertical flips, translations, scaling, rotations, elastic distortions, and cutouts, to improve model robustness \cite{devries_improved_2017}.
 
 
 \subsection{\added{Slice-Selection Algorithm}}  
 \added{
-  To operationalize our approach, we define a slice-selection algorithm that links each finding sentence to its most relevant CT slice. 
+  To implement this study’s approach, we defined a slice-selection algorithm that links each report sentence to the most relevant CT slice. 
   As illustrated in Fig. \ref{fig:clip_overview}, the text encoder embeds the finding sentence, while the image encoder embeds each axial slice of the CT volume. 
   Cosine similarities are then computed between the sentence embedding and all slice embeddings. 
-  The slice with the highest similarity score is designated as the key slice corresponding to the given finding. 
-  This procedure, summarized in Alg. \ref{alg:key_slice_selection}, constitutes the inference pipeline of our method and serves as the foundation for both evaluation and fine-tuning.
+  The slice with the highest similarity score is designated as the key slice corresponding to the finding. 
+  This procedure, summarized in Alg. \ref{alg:key_slice_selection}, constitutes the inference pipeline of this research method and serves as the foundation for both evaluation and fine-tuning.
 }
 
 
@@ -303,13 +302,13 @@ During training, we applied data augmentations such as horizontal and vertical f
 
 % 学習手法
 \subsection{Models and Training Details}
-We trained CLIP to learn correspondences between finding sentences and CT slices. 
-For the image encoder, we employed \texttt{ViT-B/16} and fine-tuned the pre-trained model using weights provided by OpenAI. 
-We applied the same procedure to PubMedCLIP and BiomedCLIP. \added{We summarize the image encoders and text encoders used in each method in Table \ref{tab:model_summary}.}
-\added{For all text encoders, the context length was set to 77 tokens, and sentences exceeding this length were truncated.}
-All training took place on a single NVIDIA RTX 6000 Ada GPU with a batch size of 64, using the AdamW optimizer \cite{loshchilov_fixing_2017}. 
-We decayed the learning rate from 5e-5 to 1e-6 over 20 epochs using cosine annealing. 
-Finally, we selected the checkpoint with the lowest validation loss for our evaluations.
+We trained CLIP to learn the correspondence between report sentences and CT slices. 
+For the image encoder, we used \texttt{ViT-B/16} and fine-tuned the pretrained model with the official OpenAI weights. 
+The same procedure was applied to PubMedCLIP and BiomedCLIP. \added{We summarize the image encoders and text encoders used in each method in Table \ref{tab:model_summary}.}
+\added{For all text encoders, the context length was fixed at 77 tokens, and sentences exceeding this length were truncated.}
+All training was conducted on a single NVIDIA RTX 6000 Ada GPU with a batch size of 64 using the AdamW optimizer \cite{loshchilov_fixing_2017}. 
+The learning rate was scheduled from 5e-5 to 1e-6 over 20 epochs using cosine annealing. 
+The checkpoint with the lowest validation loss was selected for evaluation.
 \added{The experiments were run on Ubuntu 22.04.5 LTS with Python~3.11.9 (conda-forge), using \texttt{numpy}~2.1.1, \texttt{torch}~2.4.1+cu118, and \texttt{TotalSegmentator}~2.10.0.}
 
 \begin{table}[ht]
@@ -332,43 +331,43 @@ Finally, we selected the checkpoint with the lowest validation loss for our eval
 \section{Results}
 
 % セクション全体の説明
-We evaluated the slice selection performance of six models: the pre-trained CLIP, PubMedCLIP, and BiomedCLIP, along with their fine-tuned counterparts (FT). 
+We evaluated the slice-selection performance of six models: pretrained CLIP, PubMedCLIP, and BiomedCLIP, along with their fine-tuned counterparts (FT). 
 \added{
-  Before reporting task-specific retrieval metrics, we first verified whether each model had learned meaningful alignments during training. To this end, we measured the mean absolute error (MAE) between the predicted and ground-truth slice indices under two strategies: hard prediction (selecting the top-1 slice) and soft prediction (using a local moving average).
+  Before reporting task-specific retrieval metrics, we first verified whether each model learned meaningful alignments during training. To this end, we measured the mean absolute error (MAE) between the predicted and ground-truth slice indices using two strategies: hard prediction (selecting the top-1 slice) and soft prediction (using a local moving average).
 }
-In Section \ref{sec:lesion_aware}, we assess retrieval accuracy on sentences describing actual abnormal findings from diagnostic reports. 
-In addition, we conducted a radiologist evaluation of the slice-selection results to examine clinical applicability.
-Section \ref{sec:organ_aware} reports the alignment fidelity between organ-related text and its corresponding CT slices. 
-Finally, Section \ref{sec:visualization} presents visualizations of the slice selection results on key series, illustrating both quantitative performance and qualitative interpretability.
+In Section \ref{sec:lesion_aware}, we assess the retrieval accuracy of sentences describing abnormal findings from diagnostic reports. 
+In addition, we report on a radiologist-led evaluation of slice selection results to examine clinical applicability.
+Section \ref{sec:organ_aware} presents the alignment fidelity between organ-related text and its corresponding CT slices. 
+Finally, Section \ref{sec:visualization} provides visualizations of the slice-selection results for key series, highlighting both quantitative performance and qualitative interpretability.
 
 \subsection{\added{Training Verification via Slice-Level MAE}}
 \added{
   To validate the training process, we measured the mean absolute error (MAE) between the predicted and ground-truth slice indices across all models using the image-sentence pairs from the validation set. 
-  We compared two strategies: (i) hard prediction, which directly selects the slice with the highest similarity score, and (ii) soft prediction, which applies a moving average over $\pm$2 neighboring slices to exploit the sequential continuity of CT volumes. 
+  We compared two strategies: (i) hard prediction, which directly selects the slice with the highest similarity score, and (ii) soft prediction, which applies a moving average over $\pm 2$ neighboring slices to leverage the sequential continuity of CT volumes. 
   As shown in Fig. \ref{fig:mae}, fine-tuned models consistently achieved lower MAE than their pre-trained counterparts, confirming that meaningful learning occurred. 
-  Moreover, the soft prediction strategy yielded lower errors than hard prediction, motivating our decision to adopt the soft prediction setting for all subsequent evaluations. For example, in BiomedCLIP, the MAE improved from $10.40 \pm 13.58$ with hard prediction to $9.21 \pm 11.09$ with soft prediction, corresponding to an average gain of approximately one slice in localization accuracy.
+  Moreover, the soft prediction strategy yielded fewer errors than the hard prediction strategy, motivating its adoption for all subsequent evaluations. For example, in BiomedCLIP, the MAE improved from $10.40 \pm 13.58$ with hard prediction to $9.21 \pm 11.09$ with soft prediction, corresponding to an average gain of approximately one slice in localization accuracy.
 }
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.8\textwidth]{./figures/mae.png}
   \caption{
-    \added{New figure added in revision}
+    \added{New figure added in revision.}
     Comparison of mean absolute error (MAE) between predicted and ground-truth slice indices for each method. 
-    Both hard prediction (top-1 slice) and soft prediction (moving average over $\pm$2 slices) are shown.
+    Results are shown for both hard prediction (top-1 slice) and soft prediction (moving average over $\pm$2 slices).
   }
   \label{fig:mae}
 \end{figure}
 
 
 \subsection{Lesion Awareness}\label{sec:lesion_aware}
-We evaluated the models on a test set of 22 studies containing 120 finding sentences with manually annotated ground-truth slice ranges. 
-At inference time, each sentence was encoded by the CLIP text encoder, every slice in the corresponding CT volume was processed by the image encoder, cosine similarities were computed, and the slice with the highest score was taken as the model-selected key slice (Fig. \ref{fig:clip_overview}, Alg. \ref{alg:key_slice_selection}). 
-To assess inter-observer variability, Radiologist 2—independent of the ground-truth annotator—also selected the single best-matching slice for each sentence.
-Table \ref{tab:slice_extraction_accuracy} shows both the proportion of Top-1 predictions falling within the annotated ranges and the proportion of cases where any of the Top-5 most similar slices overlap with those ranges. 
-CLIP (FT) improved Top-1 accuracy by 20 percentage points over the CLIP, demonstrating effective adaptation to the medical domain.
-Both PubMedCLIP and BiomedCLIP began with higher baseline accuracies and further improved after fine-tuning. 
-In particular, BiomedCLIP (FT) achieved the best results, with a Top-1 accuracy of 51.72\% and a Top-5 accuracy of 64.37\%. 
-Considering that a second radiologist achieved a Top-1 accuracy of 78.16\%, the model’s 51.72\% can be viewed as a relatively strong result.
+The models are evaluated using a test set of 22 studies containing 120 sentences with manually annotated ground-truth slice ranges. 
+At inference, each sentence is encoded by the CLIP text encoder, every slice in the corresponding CT volume is processed by the image encoder, cosine similarities are computed, and the slice with the highest score is selected as the model’s key slice (Fig. \ref{fig:clip_overview}, Alg. \ref{alg:key_slice_selection}). 
+To assess interobserver variability, Radiologist 2—independent of the ground-truth annotator—also selected the single best-matching slice for each sentence.
+Table \ref{tab:slice_extraction_accuracy} shows the proportion of Top-1 predictions falling within the annotated ranges and the proportion of cases in which any of the Top-5 most similar slices overlapped with those ranges. 
+CLIP (FT) improves the Top-1 accuracy by 20 percentage points over CLIP, demonstrating effective adaptation to the medical domain.
+PubMedCLIP and BiomedCLIP began with higher baseline accuracies, which are further improved by fine-tuning. 
+BiomedCLIP (FT), in particular, achieves the best performance, with a Top-1 accuracy of 51.72\% and Top-5 accuracy of 64.37\%. 
+Considering that Radiologist 2 achieved a Top-1 accuracy of 78.16\%, the model accuracy of 51.72\% represents a relatively strong result.
 
 
 
@@ -376,7 +375,7 @@ Considering that a second radiologist achieved a Top-1 accuracy of 78.16\%, the 
   \centering
   \caption{Comparison of slice-selection accuracy for each method. 
   Reported values are Top-1 and Top-5 accuracy[\%]. 
-  For each metric, the highest score among the automated methods (excluding the Radiologist2) is highlighted in red.}
+  For each metric, the highest score among the automated methods (excluding the Radiologist 2) is highlighted in red.}
   \label{tab:slice_extraction_accuracy}
   \begin{tabular}{lcc}
     \toprule
@@ -414,30 +413,30 @@ Considering that a second radiologist achieved a Top-1 accuracy of 78.16\%, the 
 
 
 % \section{Radiologist Evaluation of Slice Selection Results}\label{app:doctor_evaluation}
-As noted above, we recognized that strict ground-truth ranges do not always align with radiologist subjective assessments.
-Therefore, to evaluate whether the slices proposed by each method would be considered acceptable in clinical practice, we conducted a qualitative assessment in which a radiologist evaluated whether to adopt each suggested slice outright for a given finding sentence. 
+As noted above, strict ground-truth ranges do not always align with radiologists’ subjective assessments.
+To evaluate whether the slices proposed by each method would be considered acceptable in clinical practice, we conducted a qualitative assessment in which a radiologist evaluated whether to adopt each suggested slice for a given sentence. 
 We developed a simple web application that displayed each finding sentence alongside the slices proposed by each slice selector. 
-For each case, suggestions from all models were presented in random order on the same screen, and the radiologist was blinded to the source model. 
-Table \ref{tab:slice_selector_adoption} reports the adoption rate for each model’s recommendations. 
-While these adoption rates generally correspond to the quantitative results shown in Table \ref{tab:slice_extraction_accuracy} (Top-1 accuracy), they are uniformly slightly higher. 
-These higher adoption rates arise when lesions that the radiologist still finds acceptable fall outside the strict ground-truth range—for example, calcifications that extend across several slices or cases where the annotation covers only one of multiple hepatic cysts.
+For each case, the suggestions from all models were presented in a random order on the same screen, and the radiologist was blinded to the source model. 
+Table \ref{tab:slice_selector_adoption} reports the adoption rates for each model’s recommendations. 
+Although these adoption rates generally correspond to the quantitative results presented in Table \ref{tab:slice_extraction_accuracy} (Top-1 accuracy), they are uniformly slightly higher. 
+These higher adoption rates occur when lesions deemed acceptable by the radiologist fall outside the strict ground-truth range—for example, calcifications extending across several slices or annotation covering only one of multiple hepatic cysts.
 
 
 \subsection{Organ Awareness}\label{sec:organ_aware}
 Recognizing normal anatomy is as important as detecting abnormalities, so we deﬁne organ-aware slice selection as a complementary evaluation. 
-Using TotalSegmentator, we generated binary organ presence labels for each CT slice based on 15 major thoracoabdominal organs \cite{wasserthal_totalsegmentator_2023}. 
-For each model, we encoded the organ prompt and every CT slice, computed their cosine similarities, and then determined organ-specific thresholds (via the Youden index on the validation set) that served as the cut-off for deciding whether a given organ was present in each slice on test set \cite{youden_index_1950}. 
-To explore the impact of text granularity, we compared two input types: single-word organ names (e.g., “Heart,” “Liver”) and full template sentences such as “This CT image includes the heart.” 
-These experiments inform whether to use word-level or sentence-level prompts when querying the text encoder. 
+Using TotalSegmentator, we generated binary organ-presence labels for each CT slice based on the 15 major thoracoabdominal organs \cite{wasserthal_totalsegmentator_2023}. 
+For each model, we encoded the organ prompt and each CT slice, computed their cosine similarities, and then determined organ-specific thresholds using the Youden index on the validation set, which served as cutoffs for determining organ presence in each test slice \cite{youden_index_1950}. 
+To assess the impact of text granularity, we compared two input types: single-word organ names (e.g., “Heart,” “Liver”) and full template sentences (e.g., “This CT image includes the heart”).
+These experiments test whether word- or sentence-level prompts are more effective when querying a text encoder. 
 
 
-Table \ref{tab:organ_extraction_results} summarizes the organ-aware evaluation, reporting both accuracy and F1-score for each model under Word and Sentence prompt conditions. 
+Table \ref{tab:organ_extraction_results} summarizes the organ-aware evaluation, reporting both the accuracy and F1-score for each model under word- and sentence-prompt conditions. 
 BiomedCLIP (FT) achieved the highest performance in both settings, with an F1-score of 0.85 for Word and Sentence inputs. 
-PubMedCLIP exhibited similar accuracy and F1-scores across the two prompt types, whereas BiomedCLIP tended to perform better with Sentence prompts. 
-Fine-tuning yielded roughly equivalent gains for Word and Sentence inputs across all models, indicating that our approach generalizes well to both single-token organ names and full descriptive sentences. 
-On average, fine-tuning improved accuracy and F1-score by more than 10\% for every model. 
-These substantial improvements not only demonstrate enhanced normal-anatomy recognition accuracy for the original CLIP model but also for the medical-domain pre-trained variants PubMedCLIP and BiomedCLIP. 
-They suggest that fine-tuning can improve slice extraction accuracy from non-abnormal findings and, consequently, benefit downstream VQA generation.
+PubMedCLIP showed similar accuracy and F1-scores across the two prompt types, while BiomedCLIP tended to perform better with sentence prompts. 
+Fine-tuning yielded comparable gains for Word and Sentence inputs across all models, indicating that our approach generalized well to both single-token organ names and fully descriptive sentences. 
+On average, fine-tuning improved the accuracy and F1-score by more than 10\% for each model. 
+These substantial improvements demonstrate enhanced normal-anatomy recognition accuracy not only for the original CLIP model but also for the medical-domain pre-trained variants (PubMedCLIP and BiomedCLIP). 
+They further suggest that fine-tuning improves slice extraction accuracy for non-abnormal findings, thereby benefiting downstream VQA generation.
 F1-scores for each organ are provided in Appendix \ref{app:organ_aware_details}.
 
 
@@ -466,11 +465,11 @@ F1-scores for each organ are provided in Appendix \ref{app:organ_aware_details}.
 
 \added{
 Additionally, as an external dataset benchmark, we evaluated organ awareness using the publicly available CT-RATE dataset, which consists of chest CT volumes with organ labels generated by TotalSegmentator \cite{hamamci_ct2rep_2024}. 
-We conducted evaluation on 1,304 cases from the validation split, using the earliest series (denoted as “\_a\_1” in the dataset) when multiple CT series were available per patient. 
+We evaluated 1,304 cases from the validation split, selecting the earliest series (denoted as “\_a\_1” in the dataset) when multiple CT series were available per patient. 
 The results are summarized in Table \ref{tab:organ_extraction_results_ctrate}. 
-Overall performance was lower than those reported in Table \ref{tab:organ_extraction_results}, likely due to domain shifts related to imaging devices and acquisition parameters. 
-For instance, BiomedCLIP(FT) achieved an accuracy of 0.926 and an F1-score of 0.809 on CT-RATE, compared to 0.948 and 0.854, respectively, in our in-house dataset. 
-Despite the overall decrease, BiomedCLIP(FT) consistently yielded the highest accuracy among all models, confirming its robustness across datasets.
+Overall performance was lower than that reported in Table \ref{tab:organ_extraction_results}, likely due to domain shifts related to imaging devices and acquisition parameters. 
+For example, BiomedCLIP(FT) achieved an accuracy of 0.926 and an F1-score of 0.809 on CT-RATE, compared with 0.948 and 0.854, respectively, on the in-house dataset. 
+Despite this decrease, BiomedCLIP(FT) consistently yielded the highest accuracy across all models, confirming its robustness to dataset variation.
 }
 
 
@@ -499,12 +498,12 @@ Despite the overall decrease, BiomedCLIP(FT) consistently yielded the highest ac
 
 
 \subsection{Visualization}\label{sec:visualization}
-Fig. \ref{fig:lesion_aware_results} shows an example of lesion-aware slice-selection result on our test cohort. 
-For a case of uterine fibroids, PubMedCLIP, BiomedCLIP, and BiomedCLIP (FT) all correctly identify the key CT slice containing the lesion.
+Fig. \ref{fig:lesion_aware_results} shows an example of a lesion-aware slice-selection result on the test cohort. 
+For uterine fibroids, PubMedCLIP, BiomedCLIP, and BiomedCLIP(FT) correctly identified key CT slices containing the lesion.
 Fig. \ref{fig:organ_aware_results} shows similarity profiles between organ-related text and CT slices for a selected series. 
-The original CLIP model exhibits numerous false positives and inconsistent alignment, whereas CLIP (FT) produces a much cleaner correspondence and improved localization. 
-Although PubMedCLIP and BiomedCLIP also display some false positives and false negatives, both models achieve high accuracy in recognizing the target organ after fine-tuning. 
-Additional qualitative examples are provided in Appendix \ref{app:visualization}.
+The original CLIP model exhibited numerous false positives and inconsistent alignments, whereas CLIP (FT) produced a much cleaner correspondence and improved localization. 
+Although PubMedCLIP and BiomedCLIP also showed false positives and negatives, both models achieved high accuracy in recognizing the target organ after fine-tuning. 
+Additional qualitative examples are presented in Appendix \ref{app:visualization}.
 
 
 \begin{figure}[ht]
@@ -524,7 +523,7 @@ Additional qualitative examples are provided in Appendix \ref{app:visualization}
   \includegraphics[width=1\textwidth]{./figures/figure3_4.png}
   \caption{Similarity profile between the prompt “Heart” and each slice. 
   The green line denotes the ground-truth slice range. 
-  Similarity profiles increase from left to right, and the dashed line indicates the threshold. 
+  Similarity profiles increase from left to right, and the dashed line indicates the decision threshold. 
   }
   \label{fig:organ_aware_results}
 \end{figure}
@@ -532,75 +531,69 @@ Additional qualitative examples are provided in Appendix \ref{app:visualization}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
 
-In this study, we introduced a CLIP-based key-slice selector that aligns free-text radiology findings with their corresponding CT slices. 
-We evaluated our approach along two complementary axes: lesion awareness and organ awareness. 
-Despite training on a relatively small dataset, fine-tuned models achieved substantial gains in lesion-aware slice retrieval—improving accuracy by 7 to 20 percentage points over the pre-trained baselines. 
-The best performer, BiomedCLIP (FT), reached 51\% Top-1 accuracy for lesion localization. 
-In the organ-aware task, all fine-tuned models realized over 10\% improvements in both accuracy and F1-score. 
-Notably, performance remained strong whether organ prompts were provided as single words or full sentences, demonstrating the flexibility of our text-encoding strategy. 
+In this study, we introduced a CLIP-based key-slice selector that aligns free-text radiology findings with corresponding CT slices. 
+The approach was evaluated along two complementary axes: lesion and organ awareness. 
+Despite training on a relatively small dataset, the fine-tuned models achieved substantial gains in lesion-aware slice retrieval, improving accuracy by 7–20 percentage points over the pre-trained baselines. 
+The best performer, BiomedCLIP (FT), achieved 51\% Top-1 accuracy for lesion localization. 
+In the organ-aware task, all fine-tuned models achieved improvements of over 10 \% in both accuracy and F1-score. 
+Notably, the performance remained strong regardless of whether organ prompts were provided as single words or full sentences, demonstrating the flexibility of the text-encoding strategy. 
 \added{
-  Moreover, to examine robustness under external conditions, we conducted an additional organ-awareness evaluation on the publicly available CT-RATE dataset. 
-  While all methods exhibited some degradation in performance due to domain shifts in imaging devices and acquisition protocols, the decrease was relatively modest, and BiomedCLIP(FT) consistently achieved the highest accuracy. 
-  These findings suggest that our approach maintains robustness across datasets and can generalize beyond our in-house cohort.
+  To further examine the robustness under external conditions, we conducted an additional organ-awareness evaluation on the publicly available CT-RATE dataset. 
+  Although all methods exhibited some degradation in performance owing to domain shifts in imaging devices and acquisition protocols, the decrease was relatively modest, and BiomedCLIP (FT) consistently achieved the highest accuracy. 
+  These findings suggest that this study’s approach is robust across datasets and can be generalized beyond the in-house cohort.
 }
 
 \added{
-  In terms of system requirements, all experiments were conducted on a single NVIDIA RTX 6000 Ada GPU with 48 GB memory, which was sufficient to train the models with a batch size of 64. 
-  Each training run of 20 epochs finished within one hour. 
-  These results indicate that our method can be reproduced on a high-end single-GPU workstation without requiring distributed resources.
+  Regarding system requirements, all experiments were conducted on a single NVIDIA RTX 6000 Ada GPU with 48 GB of memory, which was sufficient to train models with a batch size of 64. 
+  Each training run with 20 epochs finished within one hour. 
+  These results indicate that the proposed method can be reproduced on a high-end single-GPU workstation without requiring distributed resources.
 }
 
 \added{
-  Beyond our own dataset, the proposed slice-selection framework offers practical benefits when applied to diverse imaging archives. 
-  First, by automatically aligning report sentences with key slices, it can substantially reduce the cost of 2D slice-level annotation, which is often the major bottleneck in dataset curation. 
-  Second, it enables the construction of image-text pairs directly from unlabeled CT volumes and routine reports, providing a low-cost pathway to expand training resources for medical VLMs. 
-  These improvements highlight the broader utility of our method across datasets and institutions, extending its impact beyond the present feasibility study.
+  Beyond the dataset used in this study, the proposed slice-selection framework offers practical benefits when applied to diverse imaging archives. 
+  First, automatically aligning report sentences with key slices can substantially reduce the cost of two-dimensional (2D) slice-level annotation, which is often a major bottleneck in dataset curation. 
+  Second, it enables the construction of image-text pairs directly from unlabeled CT volumes and routine reports, providing a low-cost pathway for expanding training resources for medical VLMs. 
+  These improvements highlight the broader utility of the proposed method across datasets and institutions, extending its impact beyond the present feasibility study.
 }
 
-Our method paves the way for fully automated construction of MedVQA datasets from routine clinical archives, directly addressing biases and scale limitations inherent in bibliographic-based collections. 
-Furthermore, the radiologist evaluation of slice-selection results (Table \ref{tab:slice_selector_adoption}) and the visualization of similarity profiles (Fig. \ref{fig:organ_aware_results}) suggest that, in addition to serving as a VQA dataset generator, integrating the slice selector into clinical workflows as a recommendation tool could help reduce radiologists’ workload and enhance diagnostic accuracy. 
+The method paves the way for fully automated construction of MedVQA datasets from routine clinical archives, directly addressing the biases and scale limitations inherent in bibliographic collections. 
+Furthermore, the radiologist’s evaluation of the slice selection results (Table \ref{tab:slice_selector_adoption}) and visualization of similarity profiles (Fig. \ref{fig:organ_aware_results}) suggest that, in addition to serving as a VQA dataset generator, integrating the slice selector into clinical workflows as a recommendation tool could help reduce radiologists’ workload and enhance diagnostic accuracy. 
 
 
 \textbf{Limitations}
-First, because this is a feasibility study, the training and test cohorts are small and drawn from a single institution. Expanding the dataset size could uncover additional gains in retrieval accuracy and reduce the risk of overﬁtting to our relatively small evaluation cohorts. 
-Second, our evaluation reports only overall lesion- and organ-aware metrics; it does not stratify results by lesion size, anatomical region, contrast phase, or disease category. A finer-grained analysis is essential for uncovering failure modes in clinically relevant subgroups. 
-Third, the Youden-index thresholds used to decide organ presence were chosen on the validation set and then fixed for testing. Although this mirrors a real-world deployment scenario, alternative calibration strategies might yield better threshold stability on unseen data. 
+First, as this was a feasibility study, the training and test cohorts were small and drawn from a single institution. Expanding the dataset size could uncover additional gains in retrieval accuracy and reduce the risk of overﬁtting to the relatively small evaluation cohorts. 
+Second, the evaluation reports only overall lesion- and organ-aware metrics; it does not stratify the results by lesion size, anatomical region, contrast phase, or disease category. Finer-grained analysis is essential to uncover failure modes in clinically relevant subgroups. 
+Third, the Youden-index thresholds used to determine organ presence were chosen from the validation set and fixed for testing. Although this mirrors a real-world deployment scenario, alternative calibration strategies may yield better threshold stability for unseen data. 
 
 
 \textbf{Future Work}
-In the future, we will integrate the key-slice selector into a complete MedVQA-generation pipeline. 
-This pipeline consists of four main stages: 
+In future work, we will integrate a key-slice selector into a complete MedVQA-generation pipeline consisting of four main stages. 
 \begin{enumerate}
   \item segmenting diagnostic reports into individual finding units, 
   \item acquiring the corresponding imaging series (including selection of contrast phases),
-  \item extracting key slices using our slice selector, and 
+  \item extracting key slices using the slice selector, and 
   \item generating VQA pairs from each finding sentence through rule-based or LLMs.
 \end{enumerate}
-While our study has addressed stage 3, 
-the remaining steps are equally critical for end-to-end automation.
-Accordingly, we plan to develop and evaluate methods for report segmentation and image retrieval, 
-and to implement VQA generation using both deterministic templates and generative LLM prompts. 
-As these components mature, we will iteratively expand our clinical dataset and refine the slice selector’s accuracy. 
+While this study addresses Stage 3, the remaining steps are critical for end-to-end automation.
+Accordingly, we plan to develop and evaluate methods for report segmentation and image retrieval, and to implement VQA generation using both deterministic templates and generative LLM prompts. 
+As these components mature, we will iteratively expand the clinical dataset and refine the slice selector’s accuracy. 
 \replaced{
-  We also plan to train VLMs on the resulting automatically constructed MedVQA dataset and compare their performance against 
-  models trained on manually curated slice annotations to quantify the impact of automated slice selection on downstream VLM capabilities.
+  We also plan to train VLMs on the resulting automatically constructed MedVQA dataset and compare their performance with models trained on manually curated slice annotations to quantify the impact of automated slice selection on the downstream VLM capabilities.
 }{
-  Finally, we intend to train VLMs on the resulting automatically constructed MedVQA dataset and compare their performance against 
-  models trained on manually curated slice annotations to quantify the impact of automated slice selection on downstream VLMs capabilities.
+  Finally, we intend to train VLMs on the resulting automatically constructed MedVQA dataset and compare their performance with 
+  models trained on manually curated slice annotations to quantify the impact of automated slice selection on the downstream VLMs capabilities.
 }
 
 \added{
-  Beyond dataset construction, architectural advances offer another promising direction. 
-  Recent large-scale VLMs such as Merlin, which align 3D CT volumes with radiology reports through contrastive learning, 
-  provide useful design principles\cite{blankemeier_merlin_2024}. 
-  Incorporating similar volume-level representation strategies, as well as techniques from the CLIP-Driven Universal Model that use text embeddings as semantic labels for segmentation and detection, 
-  could extend our framework beyond slice retrieval toward finer-grained localization and more efficient MedVQA dataset construction\cite{10376801}.
+  Beyond dataset construction, architectural advances offer promising directions. 
+  Recent large-scale VLMs such as Merlin, which align 3D CT volumes with radiology reports through contrastive learning, provide useful design principles \cite{blankemeier_merlin_2024}. 
+  Incorporating similar volume-level representation strategies, as well as techniques from the CLIP-Driven Universal Model—which uses text embeddings as semantic labels for segmentation and detection—could extend the framework beyond slice retrieval to fine-grained localization and more efficient MedVQA dataset construction \cite{10376801}.
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
 
-This study presented a CLIP-based key-slice selector that aligns free-text radiology findings with their corresponding CT images. Fine-tuning on a compact dual-supervised dataset led to a notable improvement in lesion-aware accuracy, with the best-performing model achieving strong results in lesion localization. In the organ-aware task, all fine-tuned models demonstrated improvements in both accuracy and F1-score, regardless of whether prompts were single words or full sentences. A qualitative review indicated that the slice selector’s recommendations could reduce radiologists’ workload and enhance diagnostic confidence in routine practice. However, the current evaluation is limited by a single-institution, small-cohort design, the absence of lesion-size or disease-specific analyses, and the use of fixed threshold calibration, all of which limit generalisability. Future work will expand the dataset, incorporate stratified analyses, and integrate the selector into an end-to-end MedVQA pipeline that includes report segmentation, series retrieval, slice extraction, and automatic question-answer generation.
+This study introduced a CLIP-based key-slice selector that aligns free-text radiology findings with the corresponding CT images. Fine-tuning on a compact dual-supervised dataset substantially improved lesion-aware accuracy, with the best-performing model achieving strong results in lesion localization. In the organ-aware task, all fine-tuned models demonstrated gains in both accuracy and F1-score, regardless of whether the prompts were provided as single words or full sentences. A qualitative review indicated that the slice selector’s recommendations could reduce radiologists’ workload and enhance diagnostic confidence in routine practice. Nevertheless, the current evaluation is limited by its single-institution, small-cohort design, lack of stratification by lesion size or disease type, and reliance on fixed threshold calibration, all of which limit generalizability. Future work will expand the dataset, incorporate stratified analyses, and integrate the selector into an end-to-end MedVQA pipeline encompassing report segmentation, series retrieval, slice extraction, and automatic question-answer generation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{6pt} 
@@ -641,7 +634,7 @@ This study presented a CLIP-based key-slice selector that aligns free-text radio
 
 \informedconsent{This retrospective study was approved by the Jichi Medical University Hospital Bioethics Committee for Clinical Research, and the requirement for informed consent was waived due to the retrospective nature of the study and the use of anonymized medical imaging data that poses minimal risk to participants.}
 
-\dataavailability{The datasets generated and analyzed during the current study are not publicly available due to privacy and ethical restrictions related to patient medical imaging data. The source code used for the analysis is available from the corresponding author on reasonable request.}
+\dataavailability{The datasets generated and analyzed during the current study are not publicly available due to privacy and ethical restrictions related to patient medical imaging data. The source code used for the analysis is available from the corresponding author upon reasonable request.}
 
 \conflictsofinterest{The authors declare no conflicts of interest.} 
 
@@ -674,8 +667,8 @@ VQA & Visual Question Answering\\
 \appendix
 \section{Findings Text Generation}\label{app:rule_based_text_prompt}
 The following templates were designed to generate non-abnormal finding sentences using organ labels predicted by TotalSegmentator. 
-In each template, the placeholder \texttt{\{\{organ\}\}} is replaced with the organ label obtained from TotalSegmentator. 
-Note that the original templates are written in Japanese and then translated into English, so their word order may differ from natural English syntax.
+In each template, the placeholder \texttt{\{\{organ\}\}} was replaced with the corresponding organ label obtained from TotalSegmentator. 
+Note that the original templates were written in Japanese and later translated into English; therefore, their word order may differ slightly from natural English syntax.
 \subsection{Rule-based}
 \begin{verbatim}
   organs = [
@@ -699,26 +692,26 @@ Note that the original templates are written in Japanese and then translated int
     "prefix": [
       "In the image,",
       "In this image,",
-      "In this CT image,",
+      "In this CT image,”,
       "",
     ],
     "suffix": [
       "{{organ}} is visible."
-      "{{organ}} is included."
+      "{{organ }} is included."
       "{{organ}} is contained."
       "{{organ}} etc. are visible."
-      "{{organ}} etc. are included."
-      "{{organ}} etc. are contained."
+      "{{organ }} etc. are included."
+      "{{organ }} etc. are contained."
     ],
   }
 \end{verbatim}
 \subsection{LLMs-based}
-Since we generated 20 templates for each organ, we present only those for the liver and pancreas here.
+We generated 20 sentence templates for each organ. Below, we present representative examples for the liver and pancreas.
 \begin{verbatim}
   {
     'liver': [
       'No abnormal findings are observed in the liver, and normal morphology is maintained.',
-      'No abnormal findings are observed in the liver, \
+      ''No abnormal findings are observed in the liver, \
       and morphology falls within normal limits.',
       'No lesions or abnormal findings are noted in the liver.',
       'No abnormal findings are observed in the liver, and normal morphology is maintained.',
@@ -850,8 +843,7 @@ Since we generated 20 templates for each organ, we present only those for the li
 \begin{figure}[ht]
   \centering
   \includegraphics[width=1\textwidth]{./figures/app_lesion_aware_inst6_2.png}
-  \caption{Visualization of lesion-aware slice selection for the finding 
-  "Circumferential wall thickening is observed in the antrum to pylorus of the stomach, which is consistent with findings of gastric cancer. 
+  \caption{Visualization of lesion-aware slice selection for the finding: "Circumferential wall thickening is observed in the antrum to pylorus of the stomach, which is consistent with findings of gastric cancer. 
   There is evidence of extramural invasion."
   The Ground Truth column shows the reference CT slice with the radiologist-annotated lesion bounding box.
   The other columns display each model’s key-slice prediction.
@@ -863,9 +855,8 @@ Since we generated 20 templates for each organ, we present only those for the li
 \begin{figure}[ht]
   \centering
   \includegraphics[width=1\textwidth]{./figures/app_lesion_aware_inst7_2.png}
-  \caption{Visualization of lesion-aware slice selection for the finding 
-  "Multiple enlarged lymph nodes are observed in the celiac artery region, which is considered metastatic."
-  For this example, no prediction fell within the ground-truth range.}
+  \caption{Visualization of lesion-aware slice selection for the finding: "Multiple enlarged lymph nodes are observed in the celiac artery region, which is considered metastatic."
+  In this case, no prediction fell within the ground-truth range.}
   \label{fig:lesion_aware_inst7}
 \end{figure}
 
@@ -873,8 +864,8 @@ Since we generated 20 templates for each organ, we present only those for the li
 \begin{figure}[ht]
   \centering
   \includegraphics[width=1\textwidth]{./figures/app_lesion_aware_inst8_2.png}
-  \caption{Visualization of lesion-aware slice selection for the finding 
-  "Ring enhancement lesions are observed in both lobes of the liver, indicating the presence of hepatic metastases."}
+  \caption{Visualization of lesion-aware slice selection for the finding: 
+"Ring enhancement lesions are observed in both lobes of the liver, indicating the presence of hepatic metastases."}
   \label{fig:lesion_aware_inst8}
 \end{figure}
 
@@ -882,7 +873,7 @@ Since we generated 20 templates for each organ, we present only those for the li
 \begin{figure}[ht]
   \centering
   \includegraphics[width=1\textwidth]{./figures/app_lesion_aware_inst10_2.png}
-  \caption{Visualization of lesion-aware slice selection for the finding "Prostate enlargement is observed."}
+  \caption{Visualization of lesion-aware slice selection for the finding: "Prostate enlargement is observed."}
   \label{fig:lesion_aware_inst10}
 \end{figure}
 
@@ -913,12 +904,12 @@ Since we generated 20 templates for each organ, we present only those for the li
 
 \section{\added{Impact of Organ-Aware Synthetic Data}}\label{app:impact}
 \added{
-  To highlight the contribution of synthetic data generated from organ labels, we conducted an ablation study in which the models were fine-tuned only on report-derived lesion sentences, without using any organ-aware synthetic data. 
-  Because the training set in this condition contained only 625 sentence-slice pairs (Fig. \ref{fig:dataset_detail}), we adopted a milder fine-tuning schedule with a learning rate decayed from 1e-5 to 1e-6 over 20 epochs. 
-  We refer to this model as BiomedCLIP(lesion-FT). 
-  Table \ref{tab:impact} compares the lesion-aware accuracy of BiomedCLIP, BiomedCLIP(lesion-FT), and BiomedCLIP(FT).
-  The results show that BiomedCLIP(lesion-FT) achieved a higher Top-1 accuracy than the original BiomedCLIP baseline (45.98\% vs. 44.83\%) but remained inferior to BiomedCLIP(FT), which incorporated organ-aware synthetic data (51.72\%).
-  These findings indicate that synthetic data are beneficial not only for organ-aware evaluation but also for improving lesion-aware performance.
+  To evaluate the contribution of synthetic data generated from organ labels, we conducted an ablation study in which the models were fine-tuned only on report-derived lesion sentences, without using any organ-aware synthetic data. 
+  Because the training set in this condition contained only 625 sentence-slice pairs (Fig. \ref{fig:dataset_detail}), we adopted a milder fine-tuning schedule with the learning rate decayed from 1e-5 to 1e-6 over 20 epochs. 
+  This model was referred to as BiomedCLIP(lesion-FT). 
+  Table \ref{tab:impact} compares the lesion-awareness accuracies of BiomedCLIP, BiomedCLIP(lesion-FT), and BiomedCLIP(FT).
+  The results show that BiomedCLIP(lesion-FT) achieved a higher Top-1 accuracy than the original BiomedCLIP baseline (45.98\% vs. 44.83\%), but remained inferior to BiomedCLIP(FT), which incorporated organ-aware synthetic data (51.72\%).
+  These findings indicate that synthetic data are beneficial not only for organ-aware evaluation, but also for improving lesion-aware performance.
 }
 
 \begin{table}[ht]
@@ -981,4 +972,5 @@ Since we generated 20 templates for each organ, we present only those for the li
 \end{adjustwidth}
 %} % If the paper is ``preprints'', please uncomment this parenthesis.
 \end{document}
+
 
