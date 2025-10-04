@@ -206,8 +206,7 @@ However, none of these datasets provide explicit links between report sentences 
 
 % Extraction of slices from Volumetric Dataとか？
 \subsection{Slice Selection}
-
-  Vote-MI was proposed as a weakly supervised method for identifying representative key slices from CT volumes \cite{wang_enhancing_2024}. Although effective in highlighting diagnostically relevant slices, Vote-MI is designed for slice selection alone and does not provide a mechanism for sentence-level text–image retrieval. This limits its applicability to tasks such as MedVQA dataset construction, where fine-grained alignment between report sentences and CT slices is required. In contrast, our method explicitly addresses this gap by enabling text-driven slice retrieval and further improving alignment performance through lesion- and organ-aware fine-tuning.
+Vote-MI was proposed as a weakly supervised method for identifying representative key slices from CT volumes \cite{wang_enhancing_2024}. Although effective in highlighting diagnostically relevant slices, Vote-MI is designed for slice selection alone and does not provide a mechanism for sentence-level text-image retrieval. This limits its applicability to tasks such as MedVQA dataset construction, where fine-grained alignment between report sentences and CT slices is required. In contrast, our method explicitly addresses this gap by enabling text-driven slice retrieval and further improving alignment performance through lesion- and organ-aware fine-tuning.
 
 Although no prior studies have applied CLIP to slice selection, related methods for extracting keyframes from sequential medical data have been employed for zero-shot surgical phase recognition \cite{yuan_hecvl_2025}.
 
@@ -233,7 +232,7 @@ In summary, while previous research has advanced MedVQA dataset construction, sl
 
 \subsection{Dataset}\label{sec:dataset}
 % データセット概要
-This study was approved by the ethics review board of our institution. 
+This study was approved by Jichi Medical University Hospital Bioethics Committee for Clinical Research. 
 We assembled our dataset from 137 consecutive patients with gastrointestinal cancer who underwent their ﬁrst CT examination at our institution between 2021 and 2023. 
 A board-certified radiologist (Radiologist 1) with more than ten years of experience reviewed each report and selected the appropriate CT series (e.g., optimal contrast phase) for each sentence describing an abnormality. 
 The radiologist then identified the CT slice that best matched the sentence and annotated the lesion with a bounding box. 
@@ -247,7 +246,7 @@ The original reports were written in Japanese; after confirming that they contai
   \centering
   \includegraphics[width=0.8\textwidth]{./figures/dataset_detail_1.png}
   \caption{
-    New figure added in revision. Overview of dataset composition and evaluation measures.
+    Overview of dataset composition and evaluation measures.
   }
   \label{fig:dataset_detail}
 \end{figure}
@@ -308,7 +307,7 @@ The experiments were run on Ubuntu 22.04.5 LTS with Python~3.11.9 (conda-forge),
 
 \begin{table}[ht]
   \centering
-  \caption{(New table added in revision)Summary of image and text encoders used in each method.}
+  \caption{Summary of image and text encoders used in each method.}
   \label{tab:model_summary}
   \begin{tabular}{lcc}
     \toprule
@@ -346,7 +345,6 @@ Finally, Section \ref{sec:visualization} provides visualizations of the slice-se
   \centering
   \includegraphics[width=0.8\textwidth]{./figures/mae.png}
   \caption{
-    New figure added in revision.
     Comparison of mean absolute error (MAE) between predicted and ground-truth slice indices for each method. 
     Results are shown for both hard prediction (top-1 slice) and soft prediction (moving average over $\pm$2 slices).
   }
@@ -470,7 +468,7 @@ Despite this decrease, BiomedCLIP(FT) consistently yielded the highest accuracy 
 
 \begin{table}[ht]
   \centering
-  \caption{(New table added in revision) Comparison of organ extraction performance on the external CT-RATE dataset. 
+  \caption{Comparison of organ extraction performance on the external CT-RATE dataset. 
   Reported metrics are accuracy (Acc.) and F1-score (F1). 
   “Word” indicates prompts using single organ names, and “Sentence” indicates prompts using full finding sentences. 
   The highest score in each column is highlighted in red.}
@@ -906,7 +904,7 @@ We generated 20 sentence templates for each organ. Below, we present representat
 
 \begin{table}[ht]
   \centering
-  \caption{New table added in revision Lesion-aware accuracy [\%] of BiomedCLIP variants. BiomedCLIP(lesion-FT) was fine-tuned only on lesion sentences without synthetic data.}
+  \caption{Lesion-aware accuracy [\%] of BiomedCLIP variants. BiomedCLIP(lesion-FT) was fine-tuned only on lesion sentences without synthetic data.}
   \label{tab:impact}
   \begin{tabular}{lcc}
     \toprule

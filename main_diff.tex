@@ -47,7 +47,7 @@
 % MDPI internal commands - do not modify
 \firstpage{1} 
 \makeatletter 
-\setcounter{page}{@firstpage} 
+\setcounter{page}{\@firstpage} 
 \makeatother
 \pubvolume{1}
 \issuenum{1}
@@ -141,7 +141,7 @@ $^{2}$ \quad Data Science Center, Jichi Medical University; r1419kt@jichi.ac.jp}
 %\conference{} % An extended version of a conference paper
 
 % Abstract (Do not insert blank lines, i.e. ) 
-\abstract{Large-scale medical visual question answering (MedVQA) datasets are critical for training and deploying vision-language models (VLMs) in radiology. Ideally, such datasets \replaced{should}{would} be \replaced{automatically}{mined} \replaced{constructed}{automatically} from routine radiology reports and their \replaced{corresponding}{accompanying} \replaced{images.}{images,} \replaced{However,}{yet} no existing method\added{ directly} links free-text findings to the \added{most }relevant 2D slices in volumetric \added{computed tomography (CT) }scans. \replaced{To}{We} \replaced{address}{bridge} this \replaced{gap,}{gap with} a \replaced{contrastive language–image pre-training (CLIP)-based}{CLIP-based} key-slice \replaced{selection}{selector} \replaced{framework is proposed, which}{that} matches each\deleted{ finding} sentence to its most informative CT slice via text-image similarity. \replaced{This}{Our} \replaced{experiment}{experiments} \replaced{demonstrates}{show} that models pre-trained \replaced{in}{on} the medical domain already \replaced{achieve}{provide} \replaced{competitive}{relatively} \replaced{slice}{good} \replaced{retrieval}{slice-retrieval} accuracy, and that fine-tuning them on a small dual-supervised dataset that imparts both lesion- and organ-level awareness yields further gains. In particular, the best-performing model \replaced{(fine-tuned}{(BiomedCLIP} \replaced{BiomedCLIP)}{fine-tuned)} achieved a Top-1 accuracy of 51.7% for lesion-aware slice retrieval,\added{ representing} a 20-point improvement over baseline CLIP, and was accepted by radiologists in 56.3% of cases. By automating \added{the }report-to-slice alignment, the proposed method \replaced{facilitates}{enables} scalable, \replaced{clinically realistic}{clinical-data-driven} construction of MedVQA resources.
+\abstract{Large-scale medical visual question answering (MedVQA) datasets are critical for training and deploying vision-language models (VLMs) in radiology. Ideally, such datasets \replaced{should}{would} be \replaced{automatically}{mined} \replaced{constructed}{automatically} from routine radiology reports and their \replaced{corresponding}{accompanying} \replaced{images.}{images,} \replaced{However,}{yet} no existing method\added{ directly} links free-text findings to the \added{most }relevant 2D slices in volumetric \added{computed tomography (CT) }scans. \replaced{To}{We} \replaced{address}{bridge} this \replaced{gap,}{gap with} a \replaced{contrastive language–image pre-training (CLIP)-based}{CLIP-based} key-slice \replaced{selection}{selector} \replaced{framework is proposed, which}{that} matches each\deleted{ finding} sentence to its most informative CT slice via text-image similarity. \replaced{This}{Our} \replaced{experiment}{experiments} \replaced{demonstrates}{show} that models pre-trained \replaced{in}{on} the medical domain already \replaced{achieve}{provide} \replaced{competitive}{relatively} \replaced{slice}{good} \replaced{retrieval}{slice-retrieval} accuracy, and that fine-tuning them on a small dual-supervised dataset that imparts both lesion- and organ-level awareness yields further gains. In particular, the best-performing model \replaced{(fine-tuned}{(BiomedCLIP} \replaced{BiomedCLIP)}{fine-tuned)} achieved a Top-1 accuracy of 51.7\% for lesion-aware slice retrieval,\added{ representing} a 20-point improvement over baseline CLIP, and was accepted by radiologists in 56.3\% of cases. By automating \added{the }report-to-slice alignment, the proposed method \replaced{facilitates}{enables} scalable, \replaced{clinically realistic}{clinical-data-driven} construction of MedVQA resources.
 }
 
 % Keywords
@@ -207,9 +207,14 @@ However, none of these datasets provide explicit links between report sentences 
 
 % Extraction of slices from Volumetric Dataとか？
 \subsection{Slice Selection}
-
-  Vote-MI \replaced{was}{has been} proposed as a weakly supervised method \replaced{for}{to} \replaced{identifying}{identify} representative key slices from CT volumes \cite{wang_enhancing_2024}. \replaced{Although}{While} effective in highlighting diagnostically relevant slices, Vote-MI is designed for slice selection alone and does not provide a mechanism for sentence-level text–image retrieval. This limits its applicability \replaced{to}{for} tasks such as MedVQA dataset construction, where fine-grained alignment between report sentences and CT slices is required. In contrast, our method explicitly addresses this gap by enabling text-driven slice retrieval and further improving alignment performance through lesion- and organ-aware fine-tuning.
-
+\replaced{
+  Vote-MI was proposed as a weakly supervised method for identifying representative key slices from CT volumes \cite{wang_enhancing_2024}. Although effective in highlighting diagnostically relevant slices, Vote-MI is designed for slice selection alone and does not provide a mechanism for sentence-level text–image retrieval. This limits its applicability to tasks such as MedVQA dataset construction, where fine-grained alignment between report sentences and CT slices is required. In contrast, our method explicitly addresses this gap by enabling text-driven slice retrieval and further improving alignment performance through lesion- and organ-aware fine-tuning.
+}{
+  Vote-MI proposed a method for extracting the most representative slices from 3D MRI volumes of brain tumor cases \cite{wang_enhancing_2024}. 
+  The method first employs a variational autoencoder to extract latent features from each slice and then applies clustering to select the key slice for each case. 
+  Training the VLMs on the resulting dataset yielded effective learning, although the performance remained below that achieved using expert-curated datasets. 
+  Because Vote-MI does not incorporate textual information during slice selection, its applicability is limited to brain tumor imaging and cannot be readily extended to other anatomical regions or multiple disease types.
+}
 Although no prior \replaced{studies}{study} \replaced{have}{has} applied CLIP to \replaced{slice selection,}{slice-selection,} related methods for extracting \replaced{keyframes}{key frames} from sequential medical data have been employed \replaced{for}{in} zero-shot surgical phase recognition \cite{yuan_hecvl_2025}.
 
 
@@ -234,7 +239,7 @@ In summary, while previous \replaced{research}{work} has advanced MedVQA dataset
 
 \subsection{Dataset}\label{sec:dataset}
 % データセット概要
-This study was approved by \replaced{the}{Jichi} \replaced{ethics}{Medical} \replaced{review}{University} \replaced{board}{Hospital} \replaced{of}{Bioethics} \replaced{our}{Committee} \replaced{institution.}{for Clinical Research (Approval No. 24-061).} 
+\replaced{This study was approved by Jichi Medical University Hospital Bioethics Committee for Clinical Research.}{This study was approved by the ethics review board of our institution.} 
 We assembled our dataset from 137 consecutive \added{patients with }gastrointestinal cancer\deleted{ patients} who underwent their ﬁrst CT examination at our institution between 2021 and 2023. 
 \replaced{A}{First,} \replaced{board-certified}{a} radiologist (Radiologist 1) with more than ten years of experience \replaced{reviewed}{read} each report and selected the appropriate CT series (e.g., \deleted{the }optimal contrast phase) for each\deleted{ finding} sentence describing an abnormality. 
 The radiologist then \replaced{identified}{chose} the\deleted{ single} CT slice that best matched \replaced{the}{that} sentence and \replaced{annotated the lesion with}{drew} a bounding \replaced{box. 
@@ -249,7 +254,7 @@ The original reports were written in Japanese; after confirming that they contai
   \centering
   \includegraphics[width=0.8\textwidth]{./figures/dataset_detail_1.png}
   \caption{
-    New figure added in \replaced{revision.}{revision} Overview of dataset \replaced{composition}{details} and evaluation measures.
+    \added{New figure added in revision.} Overview of dataset \replaced{composition}{details} and evaluation measures.
   }
   \label{fig:dataset_detail}
 \end{figure}
@@ -311,15 +316,15 @@ The experiments were run on Ubuntu 22.04.5 LTS with Python~3.11.9 (conda-forge),
 
 \begin{table}[ht]
   \centering
-  \caption{(New table added in revision)Summary of image and text encoders used in each method.}
+  \caption{\added{New table added in revision.} Summary of image and text encoders used in each method.}
   \label{tab:model_summary}
   \begin{tabular}{lcc}
     \toprule
-    Method                  & Image Encoder      & Text Encoder      
+    Method                  & Image Encoder      & Text Encoder       \\
     \midrule
-    CLIP                    & ViT-B/16          & Transformer       
-    PubMedCLIP              & ViT-B/32          & Transformer       
-    BiomedCLIP              & ViT-B/16          & PubMedBERT        
+    CLIP                    & ViT-B/16          & Transformer        \\
+    PubMedCLIP              & ViT-B/32          & Transformer        \\
+    BiomedCLIP              & ViT-B/16          & PubMedBERT         \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -349,7 +354,7 @@ Finally, Section \ref{sec:visualization} \replaced{provides}{presents} visualiza
   \centering
   \includegraphics[width=0.8\textwidth]{./figures/mae.png}
   \caption{
-    New figure added in \replaced{revision.}{revision}
+    \added{New figure added in revision.}
     Comparison of mean absolute error (MAE) between predicted and ground-truth slice indices for each method. 
     \replaced{Results are shown for both}{Both} hard prediction (top-1 slice) and soft prediction (moving average over $\pm$2 \replaced{slices).}{slices) are shown.}
   }
@@ -364,28 +369,28 @@ To assess \replaced{interobserver}{inter-observer} variability, Radiologist 2—
 Table \ref{tab:slice_extraction_accuracy} shows \deleted{both }the proportion of Top-1 predictions falling within the annotated ranges and the proportion of cases \replaced{in which}{where} any of the Top-5 most similar slices \replaced{overlapped}{overlap} with those ranges. 
 CLIP (FT) \replaced{improves the}{improved} Top-1 accuracy by 20 percentage points over\deleted{ the} CLIP, demonstrating effective adaptation to the medical domain.
 \deleted{Both }PubMedCLIP and BiomedCLIP began with higher baseline \replaced{accuracies,}{accuracies} \replaced{which are}{and} further improved \replaced{by}{after} fine-tuning. 
-\replaced{BiomedCLIP (FT), in}{In} particular, \replaced{achieves}{BiomedCLIP (FT) achieved} the best \replaced{performance,}{results,} with a Top-1 accuracy of 51.72% and \deleted{a }Top-5 accuracy of 64.37%. 
-Considering that \replaced{Radiologist}{a} \replaced{2}{second radiologist} achieved a Top-1 accuracy of 78.16%, the \replaced{model accuracy of}{model’s} 51.72% \replaced{represents}{can be viewed as} a relatively strong result.
+\replaced{BiomedCLIP (FT), in}{In} particular, \replaced{achieves}{BiomedCLIP (FT) achieved} the best \replaced{performance,}{results,} with a Top-1 accuracy of 51.72\% and \deleted{a }Top-5 accuracy of 64.37\%. 
+Considering that \replaced{Radiologist}{a} \replaced{2}{second radiologist} achieved a Top-1 accuracy of 78.16\%, the \replaced{model accuracy of}{model’s} 51.72\% \replaced{represents}{can be viewed as} a relatively strong result.
 
 
 
 \begin{table}[ht]
   \centering
   \caption{Comparison of slice-selection accuracy for each method. 
-  Reported values are Top-1 and Top-5 accuracy[%]. 
+  Reported values are Top-1 and Top-5 accuracy[\%]. 
   For each metric, the highest score among the automated methods (excluding the \replaced{Radiologist 2)}{Radiologist2)} is highlighted in red.}
   \label{tab:slice_extraction_accuracy}
   \begin{tabular}{lcc}
     \toprule
-    Method                  & Acc.@1,↑      & Acc.@5,↑      
+    Method                  & Acc.@1,↑      & Acc.@5,↑       \\
     \midrule
-    Radiologist2            & 78.16       & -           
-    CLIP                    & 19.54       & 44.83       
-    CLIP(FT)                & 40.23       & 49.43       
-    PubMedCLIP              & 29.89       & 54.02       
-    PubMedCLIP(FT)          & 42.53       & 59.77       
-    BiomedCLIP              & 44.83       & 60.92       
-    BiomedCLIP(FT)          & \textcolor{red}{51.72} & \textcolor{red}{64.37} 
+    Radiologist2            & 78.16       & -            \\
+    CLIP                    & 19.54       & 44.83        \\
+    CLIP(FT)                & 40.23       & 49.43        \\
+    PubMedCLIP              & 29.89       & 54.02        \\
+    PubMedCLIP(FT)          & 42.53       & 59.77        \\
+    BiomedCLIP              & 44.83       & 60.92        \\
+    BiomedCLIP(FT)          & \textcolor{red}{51.72} & \textcolor{red}{64.37}  \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -393,18 +398,18 @@ Considering that \replaced{Radiologist}{a} \replaced{2}{second radiologist} achi
 
 \begin{table}[ht]
   \centering
-  \caption{Radiologist acceptance rates[%] of slice selector predictions for each model.}
+  \caption{Radiologist acceptance rates[\%] of slice selector predictions for each model.}
   \label{tab:slice_selector_adoption}
   \begin{tabular}{lc}
     \toprule
-    Method                  & Acceptance Rate,↑ 
+    Method                  & Acceptance Rate,↑  \\
     \midrule
-    CLIP                    & 24.14        
-    CLIP(FT)                & 40.23        
-    PubMedCLIP              & 37.93        
-    PubMedCLIP(FT)          & 50.57        
-    BiomedCLIP              & 50.57        
-    BiomedCLIP(FT)          & 56.32        
+    CLIP                    & 24.14         \\
+    CLIP(FT)                & 40.23         \\
+    PubMedCLIP              & 37.93         \\
+    PubMedCLIP(FT)          & 50.57         \\
+    BiomedCLIP              & 50.57         \\
+    BiomedCLIP(FT)          & 56.32         \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -433,7 +438,7 @@ Table \ref{tab:organ_extraction_results} summarizes the organ-aware evaluation, 
 BiomedCLIP (FT) achieved the highest performance in both settings, with an F1-score of 0.85 for Word and Sentence inputs. 
 PubMedCLIP \replaced{showed}{exhibited} similar accuracy and F1-scores across the two prompt types, \replaced{while}{whereas} BiomedCLIP tended to perform better with \replaced{sentence}{Sentence} prompts. 
 Fine-tuning yielded \replaced{comparable}{roughly equivalent} gains for Word and Sentence inputs across all models, indicating that our approach \replaced{generalized}{generalizes} well to both single-token organ names and \replaced{fully}{full} descriptive sentences. 
-On average, fine-tuning improved\added{ the} accuracy and F1-score by more than 10% for \replaced{each}{every} model. 
+On average, fine-tuning improved\added{ the} accuracy and F1-score by more than 10\% for \replaced{each}{every} model. 
 These substantial improvements\deleted{ not only} demonstrate enhanced normal-anatomy recognition accuracy\added{ not only} for the original CLIP model but also for the medical-domain pre-trained variants \replaced{(PubMedCLIP}{PubMedCLIP} and \replaced{BiomedCLIP).}{BiomedCLIP.} 
 They\added{ further} suggest that fine-tuning \replaced{improves}{can improve} slice extraction accuracy \replaced{for}{from} non-abnormal \replaced{findings,}{findings} \replaced{thereby}{and,} \replaced{benefiting}{consequently, benefit} downstream VQA generation.
 F1-scores for each organ are provided in Appendix \ref{app:organ_aware_details}.
@@ -447,16 +452,16 @@ F1-scores for each organ are provided in Appendix \ref{app:organ_aware_details}.
   \label{tab:organ_extraction_results}
   \begin{tabular}{lcccc}
     \toprule
-    \multirow{2}{*}{Method} & \multicolumn{2}{c}{Word}               & \multicolumn{2}{c}{Sentence}           
+    \multirow{2}{*}{Method} & \multicolumn{2}{c}{Word}               & \multicolumn{2}{c}{Sentence}            \\
     \cmidrule(lr){2-3}\cmidrule(lr){4-5}
-                           & Acc.,↑ & F1,↑         & Acc.,↑   & F1,↑          
+                           & Acc.,↑ & F1,↑         & Acc.,↑   & F1,↑          \\ 
     \midrule
-    CLIP                    & $0.715\pm0.105$ & $0.514\pm0.182$ & $0.725\pm0.071$ & $0.520\pm0.192$ 
-    CLIP(FT)                & $0.927\pm0.038$ & $0.806\pm0.153$ & $0.934\pm0.035$ & $0.824\pm0.129$ 
-    PubMedCLIP              & $0.881\pm0.046$ & $0.722\pm0.164$ & $0.882\pm0.042$ & $0.726\pm0.157$ 
-    PubMedCLIP(FT)          & $0.943\pm0.030$ & $0.839\pm0.123$ & $0.944\pm0.031$ & $0.843\pm0.121$ 
-    BiomedCLIP              & $0.832\pm0.133$ & $0.673\pm0.230$ & $0.884\pm0.048$ & $0.730\pm0.126$ 
-    BiomedCLIP(FT)          & \textcolor{red}{$0.947\pm0.033$} & \textcolor{red}{$0.853\pm0.118$} & \textcolor{red}{$0.948\pm0.032$} & \textcolor{red}{$0.854\pm0.118$} 
+    CLIP                    & $0.715\pm0.105$ & $0.514\pm0.182$ & $0.725\pm0.071$ & $0.520\pm0.192$  \\
+    CLIP(FT)                & $0.927\pm0.038$ & $0.806\pm0.153$ & $0.934\pm0.035$ & $0.824\pm0.129$  \\
+    PubMedCLIP              & $0.881\pm0.046$ & $0.722\pm0.164$ & $0.882\pm0.042$ & $0.726\pm0.157$  \\
+    PubMedCLIP(FT)          & $0.943\pm0.030$ & $0.839\pm0.123$ & $0.944\pm0.031$ & $0.843\pm0.121$  \\
+    BiomedCLIP              & $0.832\pm0.133$ & $0.673\pm0.230$ & $0.884\pm0.048$ & $0.730\pm0.126$  \\
+    BiomedCLIP(FT)          & \textcolor{red}{$0.947\pm0.033$} & \textcolor{red}{$0.853\pm0.118$} & \textcolor{red}{$0.948\pm0.032$} & \textcolor{red}{$0.854\pm0.118$}  \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -464,7 +469,7 @@ F1-scores for each organ are provided in Appendix \ref{app:organ_aware_details}.
 
 
 Additionally, as an external dataset benchmark, we evaluated organ awareness using the publicly available CT-RATE dataset, which consists of chest CT volumes with organ labels generated by TotalSegmentator \cite{hamamci_ct2rep_2024}. 
-We \replaced{evaluated}{conducted evaluation on} 1,304 cases from the validation split, \replaced{selecting}{using} the earliest series (denoted as “_a_1” in the dataset) when multiple CT series were available per patient. 
+We \replaced{evaluated}{conducted evaluation on} 1,304 cases from the validation split, \replaced{selecting}{using} the earliest series (denoted as “\_a\_1” in the dataset) when multiple CT series were available per patient. 
 The results are summarized in Table \ref{tab:organ_extraction_results_ctrate}. 
 Overall performance was lower than \replaced{that}{those} reported in Table \ref{tab:organ_extraction_results}, likely due to domain shifts related to imaging devices and acquisition parameters. 
 For \replaced{example,}{instance,} BiomedCLIP(FT) achieved an accuracy of 0.926 and an F1-score of 0.809 on CT-RATE, compared \replaced{with}{to} 0.948 and 0.854, respectively, \replaced{on}{in} \replaced{the}{our} in-house dataset. 
@@ -474,23 +479,23 @@ Despite \replaced{this}{the overall} decrease, BiomedCLIP(FT) consistently yield
 
 \begin{table}[ht]
   \centering
-  \caption{(New table added in revision) Comparison of organ extraction performance on the external CT-RATE dataset. 
+  \caption{\added{New table added in revision.} Comparison of organ extraction performance on the external CT-RATE dataset. 
   Reported metrics are accuracy (Acc.) and F1-score (F1). 
   “Word” indicates prompts using single organ names, and “Sentence” indicates prompts using full finding sentences. 
   The highest score in each column is highlighted in red.}
   \label{tab:organ_extraction_results_ctrate}
   \begin{tabular}{lcccc}
     \toprule
-    \multirow{2}{*}{Method} & \multicolumn{2}{c}{Word}               & \multicolumn{2}{c}{Sentence}           
+    \multirow{2}{*}{Method} & \multicolumn{2}{c}{Word}               & \multicolumn{2}{c}{Sentence}            \\
     \cmidrule(lr){2-3}\cmidrule(lr){4-5}
-                          & Acc.,↑ & F1,↑         & Acc.,↑   & F1,↑          
+                          & Acc.,↑ & F1,↑         & Acc.,↑   & F1,↑           \\
     \midrule
-    CLIP                    & $0.726\pm0.059$ & $0.554\pm0.223$ & $0.724\pm0.065$ & $0.556\pm0.226$ 
-    CLIP(FT)                & $0.902\pm0.050$ & $0.770\pm0.251$ & $0.902\pm0.048$ & $0.770\pm0.250$ 
-    PubMedCLIP              & $0.842\pm0.099$ & $0.680\pm0.237$ & $0.861\pm0.095$ & $0.707\pm0.226$ 
-    PubMedCLIP(FT)          & $0.911\pm0.072$ & $0.796\pm0.252$ & $0.910\pm0.073$ & $0.795\pm0.252$ 
-    BiomedCLIP              & $0.749\pm0.171$ & $0.632\pm0.271$ & $0.755\pm0.125$ & $0.604\pm0.226$ 
-    BiomedCLIP(FT)          & \textcolor{red}{$0.926\pm0.059$} & \textcolor{red}{$0.809\pm0.257$} & \textcolor{red}{$0.926\pm0.059$} & \textcolor{red}{$0.809\pm0.257$} 
+    CLIP                    & $0.726\pm0.059$ & $0.554\pm0.223$ & $0.724\pm0.065$ & $0.556\pm0.226$  \\
+    CLIP(FT)                & $0.902\pm0.050$ & $0.770\pm0.251$ & $0.902\pm0.048$ & $0.770\pm0.250$  \\
+    PubMedCLIP              & $0.842\pm0.099$ & $0.680\pm0.237$ & $0.861\pm0.095$ & $0.707\pm0.226$  \\
+    PubMedCLIP(FT)          & $0.911\pm0.072$ & $0.796\pm0.252$ & $0.910\pm0.073$ & $0.795\pm0.252$  \\
+    BiomedCLIP              & $0.749\pm0.171$ & $0.632\pm0.271$ & $0.755\pm0.125$ & $0.604\pm0.226$  \\
+    BiomedCLIP(FT)          & \textcolor{red}{$0.926\pm0.059$} & \textcolor{red}{$0.809\pm0.257$} & \textcolor{red}{$0.926\pm0.059$} & \textcolor{red}{$0.809\pm0.257$}  \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -533,8 +538,8 @@ Additional qualitative examples are \replaced{presented}{provided} in Appendix \
 In this study, we introduced a CLIP-based key-slice selector that aligns free-text radiology findings with \deleted{their }corresponding CT slices. 
 \replaced{The approach was}{We} evaluated\deleted{ our approach} along two complementary axes: lesion\deleted{ awareness} and organ awareness. 
 Despite training on a relatively small dataset, \added{the }fine-tuned models achieved substantial gains in lesion-aware slice \replaced{retrieval, improving}{retrieval—improving} accuracy by \replaced{7–20}{7 to 20} percentage points over the pre-trained baselines. 
-The best performer, BiomedCLIP (FT), \replaced{achieved}{reached} 51% Top-1 accuracy for lesion localization. 
-In the organ-aware task, all fine-tuned models \replaced{achieved improvements of}{realized} over 10 %\deleted{ improvements} in both accuracy and F1-score. 
+The best performer, BiomedCLIP (FT), \replaced{achieved}{reached} 51\% Top-1 accuracy for lesion localization. 
+In the organ-aware task, all fine-tuned models \replaced{achieved improvements of}{realized} over 10 \%\deleted{ improvements} in both accuracy and F1-score. 
 Notably, \added{the }performance remained strong\added{ regardless of} whether organ prompts were provided as single words or full sentences, demonstrating the flexibility of \replaced{the}{our} text-encoding strategy. 
 
   \replaced{To}{Moreover,} \replaced{further}{to} examine\added{ the} robustness under external conditions, we conducted an additional organ-awareness evaluation on the publicly available CT-RATE dataset. 
@@ -649,13 +654,13 @@ The following abbreviations are used in this manuscript:
 
 \noindent 
 \begin{tabular}{@{}ll}
-CLIP & Contrastive Language-Image Pre-training
-CT & Computed Tomography
-VLM & Vision-Language Model
-MedVQA & Medical Visual Question Answering
-LLM & Large Language Model
-SOTA & State-of-the-Art
-VQA & Visual Question Answering
+CLIP & Contrastive Language-Image Pre-training\\
+CT & Computed Tomography\\
+VLM & Vision-Language Model\\
+MedVQA & Medical Visual Question Answering\\
+LLM & Large Language Model\\
+SOTA & State-of-the-Art\\
+VQA & Visual Question Answering\\
 \end{tabular}
 }
 
@@ -805,7 +810,7 @@ Note that the original templates \replaced{were}{are} written in Japanese and \r
       & \multicolumn{2}{c}{PubMedCLIP}
       & \multicolumn{2}{c}{PubMedCLIP(FT)}
       & \multicolumn{2}{c}{BiomedCLIP}
-      & \multicolumn{2}{c}{BiomedCLIP(FT)} 
+      & \multicolumn{2}{c}{BiomedCLIP(FT)}  \\
     \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}%
     \cmidrule(lr){8-9}\cmidrule(lr){10-11}\cmidrule(lr){12-13}
       & word & sentence
@@ -813,23 +818,23 @@ Note that the original templates \replaced{were}{are} written in Japanese and \r
       & word & sentence
       & word & sentence
       & word & sentence
-      & word & sentence 
+      & word & sentence  \\
     \midrule
-    aorta             & 0.679 & 0.660 & 0.960 & 0.960 & 0.852 & 0.836 & 0.966 & 0.967 & 0.858 & 0.754 & 0.943 & 0.948 
-    colon             & 0.676 & 0.747 & 0.877 & 0.877 & 0.817 & 0.859 & 0.880 & 0.878 & 0.878 & 0.886 & 0.878 & 0.878 
-    duodenum          & 0.450 & 0.522 & 0.761 & 0.775 & 0.749 & 0.762 & 0.804 & 0.841 & 0.665 & 0.724 & 0.798 & 0.828 
-    esophagus         & 0.614 & 0.731 & 0.932 & 0.931 & 0.936 & 0.918 & 0.958 & 0.958 & 0.873 & 0.895 & 0.973 & 0.972 
-    gallbladder       & 0.250 & 0.235 & 0.494 & 0.495 & 0.450 & 0.472 & 0.547 & 0.547 & 0.432 & 0.451 & 0.543 & 0.537 
-    heart             & 0.554 & 0.643 & 0.933 & 0.941 & 0.842 & 0.832 & 0.945 & 0.943 & 0.664 & 0.841 & 0.956 & 0.955 
-    kidney            & 0.684 & 0.576 & 0.886 & 0.887 & 0.767 & 0.788 & 0.885 & 0.884 & 0.733 & 0.696 & 0.917 & 0.917 
-    liver             & 0.600 & 0.570 & 0.900 & 0.901 & 0.791 & 0.832 & 0.928 & 0.921 & 0.821 & 0.750 & 0.914 & 0.912 
-    pancreas          & 0.588 & 0.518 & 0.801 & 0.807 & 0.731 & 0.716 & 0.836 & 0.841 & 0.730 & 0.755 & 0.838 & 0.824 
-    stomach           & 0.402 & 0.418 & 0.720 & 0.737 & 0.650 & 0.612 & 0.780 & 0.767 & 0.699 & 0.673 & 0.823 & 0.827 
-    spleen            & 0.325 & 0.409 & 0.731 & 0.744 & 0.619 & 0.685 & 0.809 & 0.811 & 0.665 & 0.639 & 0.810 & 0.800 
-    thyroid gland     & 0.363 & 0.227 & 0.744 & 0.744 & 0.552 & 0.576 & 0.648 & 0.647 & 0.219 & 0.643 & 0.727 & 0.728 
-    urinary bladder   & 0.165 & 0.210 & 0.491 & 0.691 & 0.387 & 0.386 & 0.739 & 0.779 & 0.160 & 0.575 & 0.753 & 0.762 
-    trachea           & 0.542 & 0.514 & 0.900 & 0.905 & 0.730 & 0.714 & 0.881 & 0.884 & 0.796 & 0.767 & 0.945 & 0.947 
-    lung              & 0.816 & 0.827 & 0.964 & 0.963 & 0.954 & 0.904 & 0.976 & 0.975 & 0.906 & 0.907 & 0.980 & 0.981 
+    aorta             & 0.679 & 0.660 & 0.960 & 0.960 & 0.852 & 0.836 & 0.966 & 0.967 & 0.858 & 0.754 & 0.943 & 0.948  \\
+    colon             & 0.676 & 0.747 & 0.877 & 0.877 & 0.817 & 0.859 & 0.880 & 0.878 & 0.878 & 0.886 & 0.878 & 0.878  \\
+    duodenum          & 0.450 & 0.522 & 0.761 & 0.775 & 0.749 & 0.762 & 0.804 & 0.841 & 0.665 & 0.724 & 0.798 & 0.828  \\
+    esophagus         & 0.614 & 0.731 & 0.932 & 0.931 & 0.936 & 0.918 & 0.958 & 0.958 & 0.873 & 0.895 & 0.973 & 0.972  \\
+    gallbladder       & 0.250 & 0.235 & 0.494 & 0.495 & 0.450 & 0.472 & 0.547 & 0.547 & 0.432 & 0.451 & 0.543 & 0.537  \\
+    heart             & 0.554 & 0.643 & 0.933 & 0.941 & 0.842 & 0.832 & 0.945 & 0.943 & 0.664 & 0.841 & 0.956 & 0.955  \\
+    kidney            & 0.684 & 0.576 & 0.886 & 0.887 & 0.767 & 0.788 & 0.885 & 0.884 & 0.733 & 0.696 & 0.917 & 0.917  \\
+    liver             & 0.600 & 0.570 & 0.900 & 0.901 & 0.791 & 0.832 & 0.928 & 0.921 & 0.821 & 0.750 & 0.914 & 0.912  \\
+    pancreas          & 0.588 & 0.518 & 0.801 & 0.807 & 0.731 & 0.716 & 0.836 & 0.841 & 0.730 & 0.755 & 0.838 & 0.824  \\
+    stomach           & 0.402 & 0.418 & 0.720 & 0.737 & 0.650 & 0.612 & 0.780 & 0.767 & 0.699 & 0.673 & 0.823 & 0.827  \\
+    spleen            & 0.325 & 0.409 & 0.731 & 0.744 & 0.619 & 0.685 & 0.809 & 0.811 & 0.665 & 0.639 & 0.810 & 0.800  \\
+    thyroid gland     & 0.363 & 0.227 & 0.744 & 0.744 & 0.552 & 0.576 & 0.648 & 0.647 & 0.219 & 0.643 & 0.727 & 0.728  \\
+    urinary bladder   & 0.165 & 0.210 & 0.491 & 0.691 & 0.387 & 0.386 & 0.739 & 0.779 & 0.160 & 0.575 & 0.753 & 0.762  \\
+    trachea           & 0.542 & 0.514 & 0.900 & 0.905 & 0.730 & 0.714 & 0.881 & 0.884 & 0.796 & 0.767 & 0.945 & 0.947  \\
+    lung              & 0.816 & 0.827 & 0.964 & 0.963 & 0.954 & 0.904 & 0.976 & 0.975 & 0.906 & 0.907 & 0.980 & 0.981  \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -910,21 +915,21 @@ Note that the original templates \replaced{were}{are} written in Japanese and \r
   Because the training set in this condition contained only 625 sentence-slice pairs (Fig. \ref{fig:dataset_detail}), we adopted a milder fine-tuning schedule with \replaced{the}{a} learning rate decayed from 1e-5 to 1e-6 over 20 epochs. 
   \replaced{This}{We} \replaced{model was referred}{refer} to\deleted{ this model} as BiomedCLIP(lesion-FT). 
   Table \ref{tab:impact} compares the \replaced{lesion-awareness}{lesion-aware} \replaced{accuracies}{accuracy} of BiomedCLIP, BiomedCLIP(lesion-FT), and BiomedCLIP(FT).
-  The results show that BiomedCLIP(lesion-FT) achieved a higher Top-1 accuracy than the original BiomedCLIP baseline (45.98% vs. 44.83\replaced{%),}{%)} but remained inferior to BiomedCLIP(FT), which incorporated organ-aware synthetic data (51.72%).
+  The results show that BiomedCLIP(lesion-FT) achieved a higher Top-1 accuracy than the original BiomedCLIP baseline (45.98\% vs. 44.83\replaced{\%),}{\%)} but remained inferior to BiomedCLIP(FT), which incorporated organ-aware synthetic data (51.72\%).
   These findings indicate that synthetic data are beneficial not only for organ-aware \replaced{evaluation,}{evaluation} but also for improving lesion-aware performance.
 
 
 \begin{table}[ht]
   \centering
-  \caption{New table added in revision Lesion-aware accuracy [%] of BiomedCLIP variants. BiomedCLIP(lesion-FT) was fine-tuned only on lesion sentences without synthetic data.}
+  \caption{\added{New table added in revision.} Lesion-aware accuracy [\%] of BiomedCLIP variants. BiomedCLIP(lesion-FT) was fine-tuned only on lesion sentences without synthetic data.}
   \label{tab:impact}
   \begin{tabular}{lcc}
     \toprule
-    Method                  & Acc.@1,↑      & Acc.@5,↑      
+    Method                  & Acc.@1,↑      & Acc.@5,↑       \\
     \midrule
-    BiomedCLIP              & 44.83       & 60.92       
-    BiomedCLIP(FT)          & 51.72       & 64.37       
-    BiomedCLIP(lesion-FT)   & 45.98       & 63.22       
+    BiomedCLIP              & 44.83       & 60.92        \\
+    BiomedCLIP(FT)          & 51.72       & 64.37        \\
+    BiomedCLIP(lesion-FT)   & 45.98       & 63.22        \\
     \bottomrule
   \end{tabular}
 \end{table}
