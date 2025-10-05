@@ -191,22 +191,24 @@ In addition, we curated a compact training set from a limited number of clinical
 
 
 % 3. Contrib.
-\textbf{Contributions}
+\textbf{\added{Contributions}}
 \begin{itemize}
-  \item CLIP-based slice selector for clinical CT. \\
+  \item \added{CLIP-based slice selector for clinical CT. \\
   We present the first CLIP-based key-slice selector that can be used to construct large-scale image-text pairs directly from routine CT studies. Feasibility is evaluated with both automatic metrics and radiologist review.
-
-  \item Efficient data-set curation protocol. \\
+  }
+  \item \added{Efficient data-set curation protocol. \\
   We describe and release a lightweight procedure that uses a small number of studies to generate balanced fine-tuning data containing both lesion-level and organ-level (negative) sentence-slice pairs.
-
-  \item Radiologist acceptance gains. \\
+  }
+  \item \added{Radiologist acceptance gains. \\
   For abnormal findings, the expert “acceptance ratio” (i.e., the proportion of automatically selected slices judged correct) improves as follows:
+  }
 \end{itemize}
 
 
 
 \begin{table}[ht]
   \centering
+  \caption*{\added{New table added in revision.}}
   \begin{tabular}{lccc}
     \toprule
     Model          & Baseline [\%]   & + Fine-tuning [\%]  &  $\Delta$ [\%]  \\

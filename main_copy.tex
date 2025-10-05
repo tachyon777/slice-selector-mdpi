@@ -190,35 +190,6 @@ This pipeline was evaluated using the original CLIP (ViT-B/16) and two medical-d
 In addition, we curated a compact training set from a limited number of clinical CT studies and fine-tuned each model using this dataset. 
 
 
-% 3. Contrib.
-\textbf{Contributions}
-\begin{itemize}
-  \item CLIP-based slice selector for clinical CT. \\
-  We present the first CLIP-based key-slice selector that can be used to construct large-scale image-text pairs directly from routine CT studies. Feasibility is evaluated with both automatic metrics and radiologist review.
-
-  \item Efficient data-set curation protocol. \\
-  We describe and release a lightweight procedure that uses a small number of studies to generate balanced fine-tuning data containing both lesion-level and organ-level (negative) sentence-slice pairs.
-
-  \item Radiologist acceptance gains. \\
-  For abnormal findings, the expert “acceptance ratio” (i.e., the proportion of automatically selected slices judged correct) improves as follows:
-\end{itemize}
-
-
-
-\begin{table}[ht]
-  \centering
-  \begin{tabular}{lccc}
-    \toprule
-    Model          & Baseline [\%]   & + Fine-tuning [\%]  &  $\Delta$ [\%]  \\
-    \midrule
-    CLIP           & 24.14           & \textbf{40.23}      & +16.09  \\
-    PubMedCLIP     & 37.93           & \textbf{50.57}      & +12.64  \\
-    BiomedCLIP     & 50.57           & \textbf{56.32}      & +5.75  \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -654,8 +625,6 @@ This study introduced a CLIP-based key-slice selector that aligns free-text radi
 \informedconsent{This retrospective study was approved by the Jichi Medical University Hospital Bioethics Committee for Clinical Research, and the requirement for informed consent was waived due to the retrospective nature of the study and the use of anonymized medical imaging data that poses minimal risk to participants.}
 
 \dataavailability{The datasets generated and analyzed during the current study are not publicly available due to privacy and ethical restrictions related to patient medical imaging data. The source code used for the analysis is available from the corresponding author upon reasonable request.}
-
-\acknowledgments{This work was partially supported by JSPS KAKENHI Grant Number JP23K17234.}
 
 \conflictsofinterest{The authors declare no conflicts of interest.} 
 
